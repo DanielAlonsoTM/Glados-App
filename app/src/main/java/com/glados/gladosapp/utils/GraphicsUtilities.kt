@@ -17,6 +17,8 @@ fun changeFullColorAppBar(context: Context, window: Window, actBar: ActionBar?) 
 //    val actionBar: ActionBar? = actBar
 //    actionBar?.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.gradient_actionbar))
 //    actionBar?.setBackgroundDrawable(resources.getDrawable(R.drawable.gradient_actionbar))
-//    actionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
-//    actionBar?.setCustomView(R.layout.actionbar_custom)
+    actBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+    actBar?.setCustomView(R.layout.actionbar_custom)
+
+
 }

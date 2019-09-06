@@ -26,6 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="?actionBarSize"
+            android:background="@drawable/gradient_background"
             android:orientation="vertical"
             android:gravity="center">
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -34,10 +35,15 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/fab_margin"
                 android:backgroundTint="@color/colorPrimaryDark"
+                app:borderWidth="4dp"
+                android:scaleType="fitXY"
+                android:elevation="8dp"
                 app:srcCompat="@drawable/ic_action_bluetooth"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp"
                 android:text="@string/find_device"/>
     </LinearLayout>
 
