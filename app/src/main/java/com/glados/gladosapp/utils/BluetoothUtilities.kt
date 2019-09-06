@@ -1,13 +1,9 @@
 package com.glados.gladosapp.utils
 
 import android.bluetooth.BluetoothAdapter
-import android.bluetooth.BluetoothHeadset
-import android.bluetooth.BluetoothManager
 import android.bluetooth.le.BluetoothLeScanner
 import android.bluetooth.le.ScanCallback
 import android.bluetooth.le.ScanResult
-import android.content.Context
-import android.content.pm.PackageManager
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
@@ -19,19 +15,15 @@ object BluetoothUtilities {
     //Get the default adapter
     private val bluetoothAdapter: BluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
 
-    fun starBluetooth(view: View) {
+
+    fun scanDevices(view: View) {
         if (bluetoothAdapter.isEnabled) {
-            bluetoothAdapter.disable()
-            snackBarMessage(view, "Disable Bluetooth")
+            bluetoothLeScanner.startScan(bleScanner)
+            snackBarMessage(view, "Start scanning")
 
         } else {
-            bluetoothAdapter.enable()
-            snackBarMessage(view, "Enable Bluetooth")
+            snackBarMessage(view, "Please, active bluetooth")
         }
-    }
-
-    fun scanDevices() {
-        bluetoothLeScanner.startScan(bleScanner)
     }
 
 
@@ -52,7 +44,6 @@ object BluetoothUtilities {
         }
 
     }
-
 
 
     private val bluetoothLeScanner: BluetoothLeScanner = bluetoothAdapter.bluetoothLeScanner

@@ -29,8 +29,7 @@ class MainActivity : AppCompatActivity() {
         changeFullColorAppBar(this, window, supportActionBar)
 
         fab.setOnClickListener { view ->
-            //            BluetoothUtilities.starBluetooth(view)
-            BluetoothUtilities.scanDevices()
+            BluetoothUtilities.scanDevices(view)
         }
     }
 
@@ -72,8 +71,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun makeRequest() {
-        ActivityCompat.requestPermissions(this,
+        ActivityCompat.requestPermissions(
+            this,
             arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
-            REQUEST_CODE)
+            REQUEST_CODE
+        )
     }
 }
