@@ -11,13 +11,13 @@ import android.view.MenuItem
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.glados.gladosapp.utils.BluetoothUtilities
-import com.glados.gladosapp.utils.changeFullColorAppBar
+import com.glados.gladosapp.utils.GraphicsUtilities.changeFullColorAppBar
 
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val REQUEST_CODE = 101
+    private val requestCode = 101
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         ActivityCompat.requestPermissions(
             this,
             arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
-            REQUEST_CODE
+            requestCode
         )
     }
 }
