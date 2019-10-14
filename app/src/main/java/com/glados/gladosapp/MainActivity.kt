@@ -2,23 +2,16 @@ package com.glados.gladosapp
 
 import android.Manifest
 import android.content.Context
-import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.Button
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.glados.gladosapp.utils.DialogUtils
 import com.glados.gladosapp.utils.GraphicsUtilities.changeFullColorAppBar
-import com.glados.gladosapp.utils.Utilities
-
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -38,8 +31,7 @@ class MainActivity : AppCompatActivity() {
             // BluetoothUtilities.scanDevices(view)
 
             // WifiUtilities.netWifiService(applicationContext, view)
-            // DialogUtils.basicAlert(view, applicationContext)
-            basicAlert(view)
+            DialogUtils.alertDialog(view, this, layoutInflater)
         }
     }
 
@@ -86,20 +78,5 @@ class MainActivity : AppCompatActivity() {
             arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
             requestCode
         )
-    }
-
-    private fun basicAlert(view: View) {
-        val builderDialog = AlertDialog.Builder(this)
-        val inflater = layoutInflater
-
-        val dialogLayout = inflater.inflate(R.layout.popup_wifi, null)
-        val editText = dialogLayout.findViewById<AppCompatEditText>(R.id.passwordWifi)
-        val buttonAlert = dialogLayout.findViewById<Button>(R.id.buttonConfirmPassword)
-
-        buttonAlert.setOnClickListener { Utilities.snackBarMessage(view, editText.text.toString()) }
-
-        builderDialog.setView(dialogLayout)
-
-        builderDialog.show()
     }
 }

@@ -23,4 +23,5 @@
         <!-- Support library compatibility -->
         <item name="background">@drawable/gradient_actionbar</item>
     </style>
+
 </resources>
