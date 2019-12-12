@@ -10,13 +10,18 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.glados.gladosapp.utils.DialogUtils
+import androidx.fragment.app.Fragment
+import com.glados.gladosapp.fragment.ConnectFragment
+import com.glados.gladosapp.fragment.HomeFragment
 import com.glados.gladosapp.utils.GraphicsUtilities.changeFullColorAppBar
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     private val requestCode = 101
+
+    private val homeFragment = HomeFragment.newInstance()
+    private val connectFragment = ConnectFragment.newInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,12 +32,25 @@ class MainActivity : AppCompatActivity() {
 
         changeFullColorAppBar(this, window, supportActionBar)
 
-        fab.setOnClickListener { view ->
-            // BluetoothUtilities.scanDevices(view)
-
-            // WifiUtilities.netWifiService(applicationContext, view)
-            DialogUtils.alertDialog(view, this, layoutInflater)
+        bottom_navigation_view.setOnNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.bnv_connect -> {
+                    openFragment(connectFragment)
+                    true
+                }
+                R.id.bnv_home -> {
+                    openFragment(homeFragment)
+                    true
+                }
+                R.id.bnv_settings -> {
+                    openFragment(connectFragment)
+                    true
+                }
+                else -> false
+            }
         }
+
+        bottom_navigation_view.selectedItemId = R.id.bnv_home
     }
 
     companion object {
@@ -78,5 +96,12 @@ class MainActivity : AppCompatActivity() {
             arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
             requestCode
         )
+    }
+
+    private fun openFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.main_fragment, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 }

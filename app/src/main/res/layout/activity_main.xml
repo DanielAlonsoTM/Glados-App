@@ -5,6 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/gradient_background"
         tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -21,29 +22,19 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-
-    <LinearLayout
+    <FrameLayout
+            android:id="@+id/main_fragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="?actionBarSize"
-            android:background="@drawable/gradient_background"
-            android:orientation="vertical"
-            android:gravity="center">
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/fab_margin"
-                app:borderWidth="4dp"
-                android:scaleType="fitXY"
-                android:elevation="8dp"
-                app:srcCompat="@drawable/ic_action_bluetooth"/>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorWhite"
-                android:textSize="20sp"
-                android:text="@string/find_device"/>
-    </LinearLayout>
+            android:layout_marginTop="?actionBarSize"/>
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/colorBackground2"
+            app:menu="@menu/menu_bottom_navigation"
+            app:itemIconTint="@drawable/bottom_navigation_selector_color"
+            app:itemTextColor="@drawable/bottom_navigation_selector_color"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
