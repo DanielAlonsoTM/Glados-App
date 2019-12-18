@@ -3,8 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="wrap_content">
     <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/passwordWifi"
             android:layout_width="match_parent"
@@ -12,13 +11,7 @@
             android:layout_marginStart="@dimen/default_margin"
             android:layout_marginEnd="@dimen/default_margin"
             android:layout_marginBottom="@dimen/default_margin"
-            android:hint="@string/type_here"/>
-
-    <Button
-            android:id="@+id/buttonConfirmPassword"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textColor="@android:color/background_light"
-            android:background="@drawable/gradient_actionbar"
-            android:text="@string/button_accept"/>
+            android:hint="@string/type_here"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorWhite"/>
 </LinearLayout>

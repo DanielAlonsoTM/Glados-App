@@ -24,4 +24,11 @@
         <item name="background">@drawable/gradient_actionbar</item>
     </style>
 
+    <style name="AlertDialogCustom" parent="@android:style/Theme.Material.Dialog">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:headerDividersEnabled">true</item>
+        <item name="android:background">@color/colorPrimaryLight</item>
+    </style>
+
 </resources>
