@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -13,6 +13,16 @@
         <!-- Set background for all screens-->
         <item name="android:windowBackground">@drawable/gradient_background</item>
         <item name="android:textColor">@color/colorWhite</item>
+
+        <!-- Remove Yellow background autocomplete -->
+        <item name="android:autofilledHighlight" tools:targetApi="o">@android:color/transparent</item>
+
+        <!-- Make Transparent status bar-->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
+<!--        <item name="android:windowTranslucentNavigation">true</item>-->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+
     </style>
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -23,9 +33,9 @@
 
     <!--    Action Bar Style-->
     <style name="GladosActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">@drawable/gradient_actionbar</item>
+        <item name="android:background">@android:color/transparent</item>
         <!-- Support library compatibility -->
-        <item name="background">@drawable/gradient_actionbar</item>
+        <item name="background">@android:color/transparent</item>
     </style>
 
     <style name="AlertDialogCustom" parent="@android:style/Theme.Material.Dialog">
