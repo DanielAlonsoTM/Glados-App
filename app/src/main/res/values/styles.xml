@@ -8,7 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
 
         <item name="actionBarStyle">@style/GladosActionBar</item>
+        <item name="android:windowDisablePreview">true</item>
 
+        <!-- Set background for all screens-->
+        <item name="android:windowBackground">@drawable/gradient_background</item>
+        <item name="android:textColor">@color/colorWhite</item>
     </style>
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>

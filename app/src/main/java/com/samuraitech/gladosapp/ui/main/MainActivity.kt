@@ -1,22 +1,27 @@
-package com.glados.gladosapp
+package com.samuraitech.gladosapp.ui.main
 
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.glados.gladosapp.fragment.ConnectFragment
-import com.glados.gladosapp.fragment.HomeFragment
-import com.glados.gladosapp.utils.GraphicsUtilities.changeFullColorAppBar
+import com.samuraitech.gladosapp.R
+import com.samuraitech.gladosapp.fragment.ConnectFragment
+import com.samuraitech.gladosapp.fragment.HomeFragment
+import com.samuraitech.gladosapp.utils.GraphicsUtilities.changeFullColorAppBar
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancel
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
     private val requestCode = 101
 
@@ -28,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        MainActivity.appContext = applicationContext
+        appContext = applicationContext
 
         changeFullColorAppBar(this, window, supportActionBar)
 
@@ -55,6 +60,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         lateinit var appContext: Context
+        var channelId = "simplified_coding"
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -76,6 +82,11 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         setupPermissions()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        cancel()
     }
 
     private fun setupPermissions() {

@@ -1,10 +1,10 @@
-package com.glados.gladosapp.utils
+package com.samuraitech.gladosapp.utils
 
 import android.content.Context
 import android.net.wifi.SupplicantState
 import android.net.wifi.WifiManager
 import android.view.View
-import com.glados.gladosapp.utils.Utilities.snackBarMessage
+import com.samuraitech.gladosapp.utils.Utilities.snackBarMessage
 
 object WifiUtilities {
 

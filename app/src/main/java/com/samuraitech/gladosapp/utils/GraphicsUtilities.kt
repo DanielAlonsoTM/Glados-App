@@ -1,11 +1,11 @@
-package com.glados.gladosapp.utils
+package com.samuraitech.gladosapp.utils
 
 import androidx.appcompat.app.ActionBar
 import android.content.Context
 import android.view.Window
 import android.view.WindowManager
 import androidx.core.content.ContextCompat
-import com.glados.gladosapp.R
+import com.samuraitech.gladosapp.R
 
 object GraphicsUtilities {
     fun changeFullColorAppBar(context: Context, window: Window, actBar: ActionBar?) {

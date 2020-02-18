@@ -1,5 +1,6 @@
-package com.glados.gladosapp.communication
+package com.samuraitech.gladosapp.communication
 
+import org.zeromq.SocketType
 import org.zeromq.ZMQ
 
 object ClientService {
@@ -8,7 +9,7 @@ object ClientService {
         try {
 
             //Set socket configuration
-            val socket = context.socket(ZMQ.REQ)
+            val socket = context.socket(SocketType.REQ)
             socket.connect("tcp://192.168.1.88:5897")
 
             val request = "$message "

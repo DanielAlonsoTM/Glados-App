@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
-      tools:context="com.glados.gladosapp.MainActivity">
+      tools:context="com.samuraitech.gladosapp.ui.main.MainActivity">
     <item android:id="@+id/bnv_connect"
           android:title="@string/bn_connect"
           android:orderInCategory="100"

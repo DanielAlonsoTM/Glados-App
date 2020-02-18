@@ -1,4 +1,4 @@
-package com.glados.gladosapp
+package com.samuraitech.gladosapp
 
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4

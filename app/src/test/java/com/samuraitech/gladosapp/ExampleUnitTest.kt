@@ -1,4 +1,4 @@
-package com.glados.gladosapp
+package com.samuraitech.gladosapp
 
 import org.junit.Test
 

@@ -1,14 +1,12 @@
-package com.glados.gladosapp.fragment
+package com.samuraitech.gladosapp.fragment
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.glados.gladosapp.R
-import com.glados.gladosapp.utils.DialogUtils
+import com.samuraitech.gladosapp.R
+import com.samuraitech.gladosapp.utils.DialogUtils
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ConnectFragment : Fragment() {

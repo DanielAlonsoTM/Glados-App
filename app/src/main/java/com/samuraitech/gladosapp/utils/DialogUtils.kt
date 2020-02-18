@@ -1,4 +1,4 @@
-package com.glados.gladosapp.utils
+package com.samuraitech.gladosapp.utils
 
 import android.content.Context
 import android.content.DialogInterface
@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatEditText
-import com.glados.gladosapp.R
-import com.glados.gladosapp.communication.ClientService
+import com.samuraitech.gladosapp.R
+import com.samuraitech.gladosapp.communication.ClientService
 
 object DialogUtils {
 

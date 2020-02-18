@@ -1,4 +1,4 @@
-package com.glados.gladosapp.utils
+package com.samuraitech.gladosapp.utils
 
 import android.view.View
 import com.google.android.material.snackbar.Snackbar

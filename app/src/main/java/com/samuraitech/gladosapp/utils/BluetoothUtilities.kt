@@ -1,4 +1,4 @@
-package com.glados.gladosapp.utils
+package com.samuraitech.gladosapp.utils
 
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothManager
@@ -8,8 +8,8 @@ import android.bluetooth.le.ScanResult
 import android.content.Context
 import android.util.Log
 import android.view.View
-import com.glados.gladosapp.MainActivity
-import com.glados.gladosapp.utils.Utilities.snackBarMessage
+import com.samuraitech.gladosapp.ui.main.MainActivity
+import com.samuraitech.gladosapp.utils.Utilities.snackBarMessage
 
 object BluetoothUtilities {
 
