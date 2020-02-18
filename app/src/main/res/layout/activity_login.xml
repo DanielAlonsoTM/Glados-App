@@ -17,6 +17,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="?actionBarSize"
                 android:src="@drawable/bot_icon"
+                android:transitionName="iconTransition"
                 android:contentDescription="@string/app_name"/>
         <LinearLayout
                 android:id="@+id/login_content_form"
@@ -88,6 +89,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:transitionName="nameAppTransition"
                 android:text="@string/app_name"
                 android:textColor="@color/colorWhite"
                 android:fontFamily="@font/fonarto_regular"
