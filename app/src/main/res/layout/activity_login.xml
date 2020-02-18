@@ -18,7 +18,8 @@
                 android:layout_height="100dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="?actionBarSize"
-                android:src="@drawable/bot_icon"/>
+                android:src="@drawable/bot_icon"
+                android:contentDescription="@string/app_name"/>
         <LinearLayout
                 android:id="@+id/login_content_form"
                 android:layout_width="match_parent"
