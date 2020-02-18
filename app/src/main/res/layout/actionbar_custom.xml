@@ -2,17 +2,16 @@
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?actionBarSize"
         android:layout_gravity="fill_horizontal"
         android:gravity="fill_horizontal"
         android:orientation="horizontal">
-
     <TextView
+            android:id="@+id/action_bar_title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="center"
-            android:id="@+id/action_bar_title"
             android:text="@string/app_name"
             android:textColor="@color/colorWhite"
             android:textSize="24sp"/>
