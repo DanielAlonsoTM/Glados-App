@@ -12,21 +12,19 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:theme="@style/AppTheme.AppBarOverlay">
-
         <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@drawable/gradient_actionbar"
                 app:popupTheme="@style/AppTheme.PopupOverlay"/>
-
     </com.google.android.material.appbar.AppBarLayout>
 
     <FrameLayout
             android:id="@+id/main_fragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="?actionBarSize"/>
+            android:layout_marginTop="?actionBarSize"
+            android:layout_marginBottom="?actionBarSize"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation_view"
