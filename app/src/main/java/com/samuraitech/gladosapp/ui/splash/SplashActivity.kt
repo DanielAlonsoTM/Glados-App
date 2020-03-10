@@ -14,7 +14,7 @@ import com.samuraitech.gladosapp.ui.login.LoginActivity
 
 class SplashActivity : AppCompatActivity() {
 
-    private val splashTimeOut: Long = 3000 // 3 sec
+    private val splashTimeOut: Long = 2000 // 3 sec
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
