@@ -2,6 +2,7 @@ package com.samuraitech.gladosapp.ui.main
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment
 import com.samuraitech.gladosapp.R
 import com.samuraitech.gladosapp.fragment.ConnectFragment
 import com.samuraitech.gladosapp.fragment.HomeFragment
+import com.samuraitech.gladosapp.ui.settings.SettingsActivity
 import com.samuraitech.gladosapp.utils.GraphicsUtilities.changeFullColorAppBar
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
@@ -31,11 +33,9 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
+//        setSupportActionBar(toolbar)
 
         appContext = applicationContext
-
-        changeFullColorAppBar(this, window, supportActionBar)
 
         bottom_navigation_view.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
@@ -56,6 +56,10 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         }
 
         bottom_navigation_view.selectedItemId = R.id.bnv_home
+
+        btn_settings.setOnClickListener {
+            startActivity(Intent(this, SettingsActivity::class.java))
+        }
     }
 
     companion object {
