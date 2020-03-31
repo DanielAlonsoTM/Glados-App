@@ -15,8 +15,8 @@ import androidx.fragment.app.Fragment
 import com.samuraitech.gladosapp.R
 import com.samuraitech.gladosapp.fragment.ConnectFragment
 import com.samuraitech.gladosapp.fragment.HomeFragment
+import com.samuraitech.gladosapp.fragment.NotificationsFragment
 import com.samuraitech.gladosapp.ui.settings.SettingsActivity
-import com.samuraitech.gladosapp.utils.GraphicsUtilities.changeFullColorAppBar
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
     private val homeFragment = HomeFragment.newInstance()
     private val connectFragment = ConnectFragment.newInstance()
+    private val notificationsFragment = NotificationsFragment.newInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,8 +48,8 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
                     openFragment(homeFragment)
                     true
                 }
-                R.id.bnv_settings -> {
-                    openFragment(connectFragment)
+                R.id.bnv_notifications -> {
+                    openFragment(notificationsFragment)
                     true
                 }
                 else -> false
