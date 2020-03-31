@@ -18,12 +18,14 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
-            app:title="@string/messages_header">
+            app:title="@string/device_header">
 
         <EditTextPreference
                 app:key="signature"
                 app:title="@string/signature_title"
-                app:useSimpleSummaryProvider="true"/>
+                app:useSimpleSummaryProvider="true"
+                app:singleLineTitle="true"
+                app:dialogLayout="@layout/dialog_pref"/>
 
         <ListPreference
                 app:key="reply"

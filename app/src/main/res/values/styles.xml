@@ -20,14 +20,14 @@
         <!-- Make Transparent status bar-->
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowTranslucentStatus">false</item>
-<!--        <item name="android:windowTranslucentNavigation">true</item>-->
         <item name="android:statusBarColor">@android:color/transparent</item>
 
+        <item name="alertDialogTheme">@style/AlertDialogCustom</item>
     </style>
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-<!--        <item name="android:windowActivityTransitions">true</item>-->
+        <!--        <item name="android:windowActivityTransitions">true</item>-->
     </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
@@ -39,7 +39,7 @@
         <item name="background">@android:color/transparent</item>
     </style>
 
-    <style name="AlertDialogCustom" parent="@android:style/Theme.Material.Dialog">
+    <style name="AlertDialogCustom" parent="Theme.AppCompat.Dialog.Alert">
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textStyle">bold</item>
         <item name="android:headerDividersEnabled">true</item>

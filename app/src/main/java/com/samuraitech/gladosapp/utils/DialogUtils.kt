@@ -13,7 +13,7 @@ import com.samuraitech.gladosapp.communication.ClientService
 object DialogUtils {
 
     fun alertDialog(view: View, context: Context, inflater: LayoutInflater) {
-        val dialogLayout = inflater.inflate(R.layout.popup_wifi, null)
+        val dialogLayout = inflater.inflate(R.layout.dialog_wifi, null)
 
         val builderDialog = AlertDialog.Builder(ContextThemeWrapper(context, R.style.AlertDialogCustom))
         builderDialog.setTitle("Wifi Settings")

@@ -33,6 +33,7 @@ class SettingsActivity : AppCompatActivity() {
             android.R.id.home ->
                 onBackPressed()
         }
+
         return super.onOptionsItemSelected(item)
     }
 }
