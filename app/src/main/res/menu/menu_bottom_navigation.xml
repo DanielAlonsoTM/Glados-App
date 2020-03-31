@@ -12,9 +12,9 @@
           android:orderInCategory="100"
           android:icon="@drawable/ic_action_home"
           app:showAsAction="never"/>
-    <item android:id="@+id/bnv_settings"
+    <item android:id="@+id/bnv_notifications"
           android:title="@string/action_settings"
           android:orderInCategory="100"
-          android:icon="@drawable/ic_action_settings"
+          android:icon="@drawable/ic_action_notifications"
           app:showAsAction="never"/>
 </menu>
