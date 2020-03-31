@@ -6,12 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 import com.samuraitech.gladosapp.R
+import com.samuraitech.gladosapp.adapter.RoomsAdapter
+import com.samuraitech.gladosapp.model.Room
 import com.samuraitech.gladosapp.notification.NotificationManager
-import com.samuraitech.gladosapp.utils.DialogUtils
-import com.samuraitech.gladosapp.utils.Utilities
 
 class HomeFragment : Fragment() {
 
@@ -33,6 +34,24 @@ class HomeFragment : Fragment() {
             NotificationManager.displayNotification(viewOfLayout.context, "Test", "test")
         }
 
+        addDumpsRooms()
+
+        val recyclerRooms: RecyclerView
+        recyclerRooms = viewOfLayout.findViewById(R.id.recycler_view_rooms)
+
+        recyclerRooms.layoutManager = LinearLayoutManager(context!!)
+        recyclerRooms.adapter = RoomsAdapter(listRooms, context!!)
+
         return viewOfLayout
+    }
+
+    private val listRooms: ArrayList<Room> = ArrayList()
+
+    private fun addDumpsRooms() {
+        listRooms.add(Room("Bathroom", "1 hour ago", 1, 1, 1))
+        listRooms.add(Room("Bathroom", "1 hour ago", 1, 1, 1))
+        listRooms.add(Room("Bathroom", "1 hour ago", 1, 1, 1))
+        listRooms.add(Room("Bathroom", "1 hour ago", 1, 1, 1))
+        listRooms.add(Room("Bathroom", "1 hour ago", 1, 1, 1))
     }
 }
