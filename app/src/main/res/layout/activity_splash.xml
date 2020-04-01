@@ -16,7 +16,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
                 android:layout_marginTop="?actionBarSize"
-                android:src="@drawable/bot_icon"
+                android:src="@drawable/icon_bot"
                 android:transitionName="iconTransition"
                 android:contentDescription="@string/app_name"/>
         <TextView

@@ -26,7 +26,7 @@ object NotificationManager {
         val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
 
         val builder = NotificationCompat.Builder(context, MainActivity.channelId)
-            .setSmallIcon(R.drawable.bot_icon)
+            .setSmallIcon(R.drawable.icon_bot)
             .setContentTitle(title)
             .setContentText(body)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)

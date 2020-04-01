@@ -16,7 +16,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="?actionBarSize"
                 android:gravity="center_horizontal"
-                android:src="@drawable/bot_icon"
+                android:src="@drawable/icon_bot"
                 android:transitionName="nameAppTransition"
                 android:text="@string/app_name"
                 android:textColor="@color/colorWhite"
