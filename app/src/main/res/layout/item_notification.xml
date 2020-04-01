@@ -10,7 +10,6 @@
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:layout_marginEnd="@dimen/default_margin"
-            android:layout_centerVertical="true"
             android:src="@drawable/ic_action_speaker"/>
 
     <TextView
@@ -20,7 +19,7 @@
             android:layout_toEndOf="@+id/notification_icon"
             android:layout_marginStart="@dimen/default_margin"
             android:text="@string/notification_head"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:fontFamily="@font/open_sans_bold"/>
 
     <TextView
@@ -31,7 +30,7 @@
             android:layout_toEndOf="@+id/notification_icon"
             android:layout_margin="@dimen/default_margin"
             android:text="@string/dump_text"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:fontFamily="@font/open_sans_regular"
             android:maxLines="3"/>
 </RelativeLayout>

@@ -37,6 +37,7 @@ class NotificationsAdapter(private val notifications: ArrayList<Notification>, v
         textViewContent.text = notification.content
         iconNotification.setImageDrawable(notification.drawable)
 
+        // Set background view
         val drawableBackground: Drawable
 
         drawableBackground = when (notification.type) {
