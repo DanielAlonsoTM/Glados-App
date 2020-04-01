@@ -8,4 +8,6 @@
     <color name="colorAccentDark">#EC1315</color>
     <color name="colorTransparent">#80000000</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorOk">#21D99A</color>
+    <color name="colorError">#D83F52</color>
 </resources>

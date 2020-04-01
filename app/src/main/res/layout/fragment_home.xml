@@ -8,14 +8,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:gravity="center"
             tools:ignore="UselessParent">
         <Button
                 android:id="@+id/btn_notification_test"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/app_name"
-                android:textColor="@color/colorPrimaryDark"/>
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/default_margin"
+                android:paddingStart="35dp"
+                android:paddingEnd="35dp"
+                android:drawableStart="@drawable/ic_action_lock"
+                android:drawablePadding="@dimen/default_margin"
+                android:text="@string/security_system_status"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:fontFamily="@font/sen_regular"
+                android:background="@drawable/button_security_device_status_ok"/>
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_rooms"
                 android:layout_width="match_parent"
