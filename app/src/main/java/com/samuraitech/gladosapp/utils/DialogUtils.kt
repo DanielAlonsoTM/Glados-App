@@ -1,6 +1,6 @@
 package com.samuraitech.gladosapp.utils
 
-import android.content.Context
+import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
@@ -12,10 +12,11 @@ import com.samuraitech.gladosapp.communication.ClientService
 
 object DialogUtils {
 
-    fun alertDialog(view: View, context: Context, inflater: LayoutInflater) {
+    @SuppressLint("InflateParams")
+    fun alertDialog(view: View, inflater: LayoutInflater) {
         val dialogLayout = inflater.inflate(R.layout.dialog_wifi, null)
 
-        val builderDialog = AlertDialog.Builder(ContextThemeWrapper(context, R.style.AlertDialogCustom))
+        val builderDialog = AlertDialog.Builder(ContextThemeWrapper(view.context, R.style.AlertDialogCustom))
         builderDialog.setTitle("Wifi Settings")
 
         val editText = dialogLayout.findViewById<AppCompatEditText>(R.id.passwordWifi)

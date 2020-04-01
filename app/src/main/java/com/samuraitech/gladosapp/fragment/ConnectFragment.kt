@@ -29,7 +29,7 @@ class ConnectFragment : Fragment() {
             // BluetoothUtilities.scanDevices(view)
 
             // WifiUtilities.netWifiService(applicationContext, view)
-            DialogUtils.alertDialog(view, viewOfLayout.context, layoutInflater)
+            DialogUtils.alertDialog(view, layoutInflater)
         }
         return viewOfLayout
     }
