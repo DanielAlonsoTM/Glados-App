@@ -8,6 +8,7 @@
     <!--    Bottom Navigation-->
     <string name="bn_home">Home</string>
     <string name="bn_connect">Connect</string>
+    <string name="bn_notifications">Notifications</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -44,4 +45,10 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails</string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="security_system_status">Security system enabled</string>
+    <string name="dump_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi semper mollis sem, non
+        mollis lectus dictum ac. Suspendisse auctor vitae mauris ac rutrum. Curabitur ac tortor in est suscipit
+        facilisis quis nec purus.
+    </string>
+    <string name="notification_head">Notification Head</string>
+    <string name="notifications">Notifications</string>
 </resources>

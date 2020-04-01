@@ -10,24 +10,24 @@ import com.samuraitech.gladosapp.R
 import com.samuraitech.gladosapp.model.Room
 import kotlinx.android.synthetic.main.item_room.view.*
 
-class RoomsAdapter(private val items: ArrayList<Room>, val context: Context) : RecyclerView.Adapter<ViewHolder>() {
+class RoomsAdapter(private val rooms: ArrayList<Room>, val context: Context) : RecyclerView.Adapter<ViewHolderRoom>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_room, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderRoom {
+        return ViewHolderRoom(LayoutInflater.from(context).inflate(R.layout.item_room, parent, false))
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return rooms.size
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val room = items[position]
+    override fun onBindViewHolder(holderRoom: ViewHolderRoom, position: Int) {
+        val room = rooms[position]
 
-        val textViewName = holder.roomName
-        val textViewLastActivity = holder.roomLastActivity
-        val textViewTemperature = holder.roomTemperature
-        val textViewKilowattsConsumed = holder.roomKilowatts
-        val textViewHumidity = holder.roomHumidity
+        val textViewName = holderRoom.roomName
+        val textViewLastActivity = holderRoom.roomLastActivity
+        val textViewTemperature = holderRoom.roomTemperature
+        val textViewKilowattsConsumed = holderRoom.roomKilowatts
+        val textViewHumidity = holderRoom.roomHumidity
 
         val roomTemperature = "${room.temperature} °C"
         val roomKilowatts = "${room.kilowattsConsumed} kWh"
@@ -41,7 +41,7 @@ class RoomsAdapter(private val items: ArrayList<Room>, val context: Context) : R
     }
 }
 
-class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class ViewHolderRoom(view: View) : RecyclerView.ViewHolder(view) {
     val roomName: TextView = view.text_room_name
     val roomLastActivity: TextView = view.text_last_activity
     val roomTemperature: TextView = view.text_temperature
