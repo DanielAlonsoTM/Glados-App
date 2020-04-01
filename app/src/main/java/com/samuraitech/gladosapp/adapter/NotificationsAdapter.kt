@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -30,9 +31,11 @@ class NotificationsAdapter(private val notifications: ArrayList<Notification>, v
         val viewParent = holder.notificationParent
         val textViewHeader = holder.notificationHeader
         val textViewContent = holder.notificationContent
+        val iconNotification = holder.notificationIcon
 
         textViewHeader.text = notification.header
         textViewContent.text = notification.content
+        iconNotification.setImageDrawable(notification.drawable)
 
         val drawableBackground: Drawable
 
@@ -50,4 +53,5 @@ class ViewHolderNotification(view: View) : RecyclerView.ViewHolder(view) {
     val notificationParent: View = view
     val notificationHeader: TextView = view.text_notification_header
     val notificationContent: TextView = view.text_notification_content
+    val notificationIcon: ImageView = view.notification_icon
 }

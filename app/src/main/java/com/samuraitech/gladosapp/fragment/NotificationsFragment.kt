@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -40,10 +41,50 @@ class NotificationsFragment : Fragment() {
     private val listNotifications: ArrayList<Notification> = ArrayList()
 
     private fun addDumpNotifications() {
-        listNotifications.add(Notification("Room clear", getString(R.string.dump_text), NotificationType.NORMAL))
-        listNotifications.add(Notification("Room ugly", getString(R.string.dump_text), NotificationType.WARNING))
-        listNotifications.add(Notification("Room clear", getString(R.string.dump_text), NotificationType.ERROR))
-        listNotifications.add(Notification("Room clear", getString(R.string.dump_text), NotificationType.WARNING))
-        listNotifications.add(Notification("Room clear", getString(R.string.dump_text), NotificationType.NORMAL))
+
+        val drawableSpeaker = ContextCompat.getDrawable(context!!, R.drawable.ic_action_speaker)
+        val drawableSmartPhone = ContextCompat.getDrawable(context!!, R.drawable.ic_action_smartphone)
+        val drawableTv = ContextCompat.getDrawable(context!!, R.drawable.ic_action_tv)
+
+        listNotifications.add(
+            Notification(
+                "Smartphone linked successful",
+                getString(R.string.dump_text),
+                NotificationType.NORMAL,
+                drawableSmartPhone!!
+            )
+        )
+        listNotifications.add(
+            Notification(
+                "Bluetooth Speaker has low battery",
+                getString(R.string.dump_text),
+                NotificationType.WARNING,
+                drawableSpeaker!!
+            )
+        )
+        listNotifications.add(
+            Notification(
+                "Lost connection with SmartTV",
+                getString(R.string.dump_text),
+                NotificationType.ERROR,
+                drawableTv!!
+            )
+        )
+        listNotifications.add(
+            Notification(
+                "Bluetooth Speaker has low battery",
+                getString(R.string.dump_text),
+                NotificationType.WARNING,
+                drawableSpeaker
+            )
+        )
+        listNotifications.add(
+            Notification(
+                "SmartTv has been turned on",
+                getString(R.string.dump_text),
+                NotificationType.NORMAL,
+                drawableTv
+            )
+        )
     }
 }

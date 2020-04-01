@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_margin="@dimen/default_margin"
-              android:padding="5dp">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin"
+                android:padding="5dp">
+    <ImageView
+            android:id="@+id/notification_icon"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_action_speaker"/>
+
     <TextView
             android:id="@+id/text_notification_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/notification_icon"
             android:layout_marginStart="@dimen/default_margin"
             android:text="@string/notification_head"
             android:textSize="18sp"
@@ -18,9 +27,11 @@
             android:id="@+id/text_notification_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/text_notification_header"
+            android:layout_toEndOf="@+id/notification_icon"
             android:layout_margin="@dimen/default_margin"
             android:text="@string/dump_text"
             android:textSize="14sp"
             android:fontFamily="@font/open_sans_regular"
             android:maxLines="3"/>
-</LinearLayout>
+</RelativeLayout>
