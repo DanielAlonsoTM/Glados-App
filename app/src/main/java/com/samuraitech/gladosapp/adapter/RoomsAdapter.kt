@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.samuraitech.gladosapp.R
 import com.samuraitech.gladosapp.model.Room
@@ -38,6 +39,12 @@ class RoomsAdapter(private val rooms: ArrayList<Room>, val context: Context) : R
         textViewTemperature.text = roomTemperature
         textViewKilowattsConsumed.text = roomKilowatts
         textViewHumidity.text = roomHumidity
+
+        //Create recyclerViewDevices for every Room
+        val recyclerDevices: RecyclerView = holderRoom.recyclerViewDevices
+
+        recyclerDevices.layoutManager = LinearLayoutManager(context)
+        recyclerDevices.adapter = DevicesInRoomAdapter(room.devicesInRoom, context)
     }
 }
 
@@ -47,4 +54,5 @@ class ViewHolderRoom(view: View) : RecyclerView.ViewHolder(view) {
     val roomTemperature: TextView = view.text_temperature
     val roomKilowatts: TextView = view.text_kilowatts
     val roomHumidity: TextView = view.text_humidity
+    val recyclerViewDevices: RecyclerView = view.recycler_view_devices_in_room
 }
