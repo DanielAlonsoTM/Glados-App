@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatEditText
+
 import com.samuraitech.gladosapp.R
 import com.samuraitech.gladosapp.communication.ClientService
 
