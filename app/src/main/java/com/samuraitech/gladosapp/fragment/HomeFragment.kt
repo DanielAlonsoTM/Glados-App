@@ -38,8 +38,7 @@ class HomeFragment : Fragment() {
 
         addDumpsRooms()
 
-        val recyclerRooms: RecyclerView
-        recyclerRooms = viewOfLayout.findViewById(R.id.recycler_view_rooms)
+        val recyclerRooms: RecyclerView = viewOfLayout.findViewById(R.id.recycler_view_rooms)
 
         recyclerRooms.layoutManager = LinearLayoutManager(context!!)
         recyclerRooms.adapter = RoomsAdapter(listRooms, context!!)
