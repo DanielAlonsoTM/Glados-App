@@ -1,5 +1,6 @@
 package com.samuraitech.gladosapp.communication
 
+import android.util.Log
 import org.zeromq.SocketType
 import org.zeromq.ZMQ
 
@@ -25,7 +26,7 @@ object ClientService {
             val byteReply = socket.recv(0)
             val plainReply = String(byteReply, 0, byteReply.size - 1)
 
-            println(plainReply)
+            Log.d("RESPONSE_FROM_SERVER", plainReply)
         } catch (exception: Exception) {
             exception.printStackTrace()
         }
