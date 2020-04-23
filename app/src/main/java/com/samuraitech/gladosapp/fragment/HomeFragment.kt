@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlin.collections.ArrayList
 
 import com.samuraitech.gladosapp.R
 import com.samuraitech.gladosapp.adapter.RoomsAdapter
+import com.samuraitech.gladosapp.model.Device
 import com.samuraitech.gladosapp.model.Room
 import com.samuraitech.gladosapp.notification.NotificationManager
 
@@ -46,12 +48,24 @@ class HomeFragment : Fragment() {
     }
 
     private val listRooms: ArrayList<Room> = ArrayList()
+    private val listDevices: ArrayList<Device> = ArrayList()
 
+    //Dump Function
     private fun addDumpsRooms() {
-        listRooms.add(Room("Bathroom", "1 hour ago", 1, 1, 1))
-        listRooms.add(Room("Bathroom", "1 hour ago", 1, 1, 1))
-        listRooms.add(Room("Bathroom", "1 hour ago", 1, 1, 1))
-        listRooms.add(Room("Bathroom", "1 hour ago", 1, 1, 1))
-        listRooms.add(Room("Bathroom", "1 hour ago", 1, 1, 1))
+        addDumpsDevices()
+
+        listRooms.add(Room(1, "Bathroom", "1 hour ago", 1, 1, 1, listDevices))
+        listRooms.add(Room(2, "BedRoom", "1 hour ago", 1, 1, 1, listDevices))
+        listRooms.add(Room(3, "Bathroom", "1 hour ago", 1, 1, 1, listDevices))
+        listRooms.add(Room(4, "Bathroom", "1 hour ago", 1, 1, 1, listDevices))
+        listRooms.add(Room(5, "Bathroom", "1 hour ago", 1, 1, 1, listDevices))
+    }
+
+    //Dump Function
+    private fun addDumpsDevices() {
+        listDevices.add(Device(1, "Samsung s30 plus 4k", "tv"))
+        listDevices.add(Device(2, "Phillips n35xf", "speaker"))
+        listDevices.add(Device(3, "Light bulb w30n-l", "light-bulb"))
+        listDevices.add(Device(4, "Unknown", "speaker"))
     }
 }

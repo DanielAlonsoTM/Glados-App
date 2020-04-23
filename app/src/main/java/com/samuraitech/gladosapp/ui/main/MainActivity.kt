@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment
 import com.samuraitech.gladosapp.R
 import com.samuraitech.gladosapp.fragment.ConnectFragment
 import com.samuraitech.gladosapp.fragment.HomeFragment
-import com.samuraitech.gladosapp.fragment.NotificationsFragment
+import com.samuraitech.gladosapp.fragment.EventsRegisterFragment
 import com.samuraitech.gladosapp.ui.settings.SettingsActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
     private val homeFragment = HomeFragment.newInstance()
     private val connectFragment = ConnectFragment.newInstance()
-    private val notificationsFragment = NotificationsFragment.newInstance()
+    private val eventsRegisterFragment = EventsRegisterFragment.newInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
                     true
                 }
                 R.id.bnv_notifications -> {
-                    openFragment(notificationsFragment)
+                    openFragment(eventsRegisterFragment)
                     true
                 }
                 else -> false
