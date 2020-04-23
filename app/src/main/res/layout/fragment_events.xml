@@ -3,7 +3,7 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context=".fragment.NotificationsFragment">
+             tools:context=".fragment.EventsRegisterFragment">
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -13,7 +13,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/default_margin"
-                android:text="@string/notifications"
+                android:text="@string/events"
                 android:textSize="28sp"
                 android:fontFamily="@font/sen_bold"/>
         <androidx.recyclerview.widget.RecyclerView

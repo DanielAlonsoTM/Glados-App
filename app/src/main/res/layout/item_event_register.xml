@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/notification_icon"
             android:layout_marginStart="@dimen/default_margin"
-            android:text="@string/notification_head"
+            android:text="@string/event_head"
             android:textSize="14sp"
             android:fontFamily="@font/open_sans_bold"/>
 
