@@ -35,9 +35,10 @@ class DevicesInRoomAdapter(private val devices: ArrayList<Device>, val context: 
         textViewName.text = device.name
 
         imageViewDevice.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.icon_bulb))
+
         imageViewDevice.setColorFilter(
             ContextCompat.getColor(context, R.color.colorWhite),
-            android.graphics.PorterDuff.Mode.MULTIPLY
+            android.graphics.PorterDuff.Mode.SRC_IN
         )
 
         switchDevice.setOnClickListener {
