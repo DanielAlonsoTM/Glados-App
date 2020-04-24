@@ -17,7 +17,6 @@ import com.samuraitech.gladosapp.model.Room
 import com.samuraitech.gladosapp.notification.NotificationManager
 
 class HomeFragment : Fragment() {
-
     companion object {
         fun newInstance(): HomeFragment = HomeFragment()
     }

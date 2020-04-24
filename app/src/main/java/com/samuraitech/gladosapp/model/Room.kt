@@ -9,4 +9,3 @@ data class Room(
     val humidity: Int,
     val devicesInRoom: ArrayList<Device>
 )
-
