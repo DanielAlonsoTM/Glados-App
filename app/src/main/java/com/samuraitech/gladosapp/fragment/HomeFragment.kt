@@ -61,9 +61,9 @@ class HomeFragment : Fragment() {
 
     //Dump Function
     private fun addDumpsDevices() {
-        listDevices.add(Device(1, "Samsung s30 plus 4k", "tv"))
-        listDevices.add(Device(2, "Phillips n35xf", "speaker"))
-        listDevices.add(Device(3, "Light bulb w30n-l", "light-bulb"))
-        listDevices.add(Device(4, "Unknown", "speaker"))
+        listDevices.add(Device(1, 1, "Samsung s30 plus 4k", "tv"))
+        listDevices.add(Device(2, 1, "Phillips n35xf", "speaker"))
+        listDevices.add(Device(3, 1, "Light bulb w30n-l", "light-bulb"))
+        listDevices.add(Device(4, 1, "Unknown", "speaker"))
     }
 }

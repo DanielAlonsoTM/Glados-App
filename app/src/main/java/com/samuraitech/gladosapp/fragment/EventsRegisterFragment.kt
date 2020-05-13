@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.samuraitech.gladosapp.R
 import com.samuraitech.gladosapp.adapter.EventRegistersAdapter
 import com.samuraitech.gladosapp.model.EventRegister
-import com.samuraitech.gladosapp.model.EventType
+import com.samuraitech.gladosapp.model.EnumType.EventType
 
 class EventsRegisterFragment : Fragment() {
 

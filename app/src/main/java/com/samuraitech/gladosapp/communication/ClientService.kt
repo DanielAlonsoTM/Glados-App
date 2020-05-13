@@ -8,7 +8,6 @@ object ClientService {
     fun sendMessageToServer(message: String) {
         val context = ZMQ.context(1)
         try {
-
             //Set socket configuration
             val socket = context.socket(SocketType.REQ)
             socket.connect("tcp://192.168.1.88:5897")

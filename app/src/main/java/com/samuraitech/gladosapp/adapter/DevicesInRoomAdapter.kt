@@ -1,7 +1,6 @@
 package com.samuraitech.gladosapp.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +10,14 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.samuraitech.gladosapp.R
+import com.samuraitech.gladosapp.communication.ClientService
 import com.samuraitech.gladosapp.model.Device
+import com.samuraitech.gladosapp.model.EnumType.ActionType
+import com.samuraitech.gladosapp.model.Message
+import com.samuraitech.gladosapp.utils.MessagesUtils
 import kotlinx.android.synthetic.main.item_device.view.*
+import java.time.LocalDateTime
+import kotlin.collections.ArrayList
 
 class DevicesInRoomAdapter(private val devices: ArrayList<Device>, val context: Context) :
     RecyclerView.Adapter<ViewHolderDevice>() {
@@ -41,8 +46,27 @@ class DevicesInRoomAdapter(private val devices: ArrayList<Device>, val context: 
             android.graphics.PorterDuff.Mode.SRC_IN
         )
 
-        switchDevice.setOnClickListener {
-            Log.d("SWITCH", "test")
+        switchDevice.setOnCheckedChangeListener { _, isChecked ->
+            val actionType = if (isChecked) ActionType.TURN_ON else ActionType.TURN_OFF
+
+            //Build instruction
+            Thread(Runnable {
+                val instruction = Message.Instruction(
+                    device.id.toString(),
+                    device.roomId,
+                    actionType,
+                    1000
+                )
+
+                val message = Message.Body(
+                    "A001",
+                    LocalDateTime.now().toString(),
+                    Message.MessageType.INSTRUCTION,
+                    instruction
+                )
+
+                MessagesUtils.messageToJSONFormat(message)?.let { ClientService.sendMessageToServer(it) }
+            }).start()
         }
     }
 }

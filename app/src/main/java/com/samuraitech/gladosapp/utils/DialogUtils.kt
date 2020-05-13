@@ -9,7 +9,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatEditText
 
 import com.samuraitech.gladosapp.R
-import com.samuraitech.gladosapp.communication.ClientService
 
 object DialogUtils {
 
@@ -24,10 +23,9 @@ object DialogUtils {
 
         builderDialog.setView(dialogLayout)
         builderDialog.setPositiveButton("Ok") { _: DialogInterface?, _: Int ->
-            Thread(Runnable {
-                ClientService.sendMessageToServer(editText.text.toString())
-            }).start()
+            Utilities.snackBarMessage(view, editText.toString())
         }
+
         builderDialog.show()
     }
 }

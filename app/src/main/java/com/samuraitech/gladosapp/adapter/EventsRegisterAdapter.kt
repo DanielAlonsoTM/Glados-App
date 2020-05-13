@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_event_register.view.*
 
 import com.samuraitech.gladosapp.R
-import com.samuraitech.gladosapp.model.EventType
+import com.samuraitech.gladosapp.model.EnumType.EventType
 import com.samuraitech.gladosapp.model.EventRegister
 
 class EventRegistersAdapter(private val eventRegisters: ArrayList<EventRegister>, val context: Context) :

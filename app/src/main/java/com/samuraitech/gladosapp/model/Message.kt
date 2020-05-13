@@ -1,13 +1,13 @@
 package com.samuraitech.gladosapp.model
 
-import java.time.LocalDateTime
+import com.google.gson.annotations.SerializedName
 
 class Message {
     data class Body(
-        val id: String,
-        val date: String,
-        val type: MessageType,
-        var contentType: Any
+        @SerializedName("id") val id: String,
+        @SerializedName("date") val date: String,
+        @SerializedName("type") val type: MessageType,
+        @SerializedName("contentType") var contentType: Any
     )
 
     enum class MessageType {
@@ -15,19 +15,17 @@ class Message {
     }
 
     data class Event(
-        val id_device: String,
-        val id_room: Int,
-        val type: EventType,
-        val title: String,
-        val content: String
+        @SerializedName("id_device") val id_device: String,
+        @SerializedName("id_room") val id_room: Int,
+        @SerializedName("type") val type: EnumType.EventType,
+        @SerializedName("title") val title: String,
+        @SerializedName("content") val content: String
     )
 
     data class Instruction(
-        val id_device: String,
-        val id_room: Int,
-        val action: String,
-        val timeToExecute: Long
+        @SerializedName("id_device") val id_device: String,
+        @SerializedName("id_room") val id_room: Int,
+        @SerializedName("action") val action: EnumType.ActionType,
+        @SerializedName("timeToExecute") val timeToExecute: Long
     )
 }
-
-
