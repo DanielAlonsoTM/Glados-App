@@ -8,7 +8,6 @@ object MessagesUtils {
     fun messageToJSONFormat(message: Message.Body): String? {
         return try {
             val json = Gson().toJson(message, Message.Body::class.java)
-
             json
         } catch (exception: Exception) {
             Log.e("ERROR", "$exception")
