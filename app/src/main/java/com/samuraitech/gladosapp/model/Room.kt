@@ -1,11 +1,18 @@
 package com.samuraitech.gladosapp.model
 
+import com.google.gson.annotations.SerializedName
+
 data class Room(
-    val id: Int,
+    @SerializedName("idRoom")
+    val idRoom: Int,
+    @SerializedName("name")
     val name: String,
+    @SerializedName("lastActivity")
     val lastActivity: String,
-    val temperature: Int,
-    val kilowattsConsumed: Int,
-    val humidity: Int,
-    val devicesInRoom: ArrayList<Device>
+    @SerializedName("temperatureCelsius")
+    val temperatureCelsius: String,
+    @SerializedName("kilowattsConsumed")
+    val kilowattsConsumed: String,
+    @SerializedName("humidityPercent")
+    val humidityPercent: String
 )

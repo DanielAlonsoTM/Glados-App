@@ -1,6 +1,7 @@
 package com.samuraitech.gladosapp.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,9 +13,14 @@ import kotlin.collections.ArrayList
 
 import com.samuraitech.gladosapp.R
 import com.samuraitech.gladosapp.adapter.RoomsAdapter
+import com.samuraitech.gladosapp.api.DeviceRestAPI
+import com.samuraitech.gladosapp.api.RoomRestAPI
 import com.samuraitech.gladosapp.model.Device
 import com.samuraitech.gladosapp.model.Room
 import com.samuraitech.gladosapp.notification.NotificationManager
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class HomeFragment : Fragment() {
     companion object {
@@ -35,35 +41,37 @@ class HomeFragment : Fragment() {
             NotificationManager.displayNotification(viewOfLayout.context, "Test", "test")
         }
 
-        addDumpsRooms()
+        val listRooms: ArrayList<Room> = ArrayList()
 
-        val recyclerRooms: RecyclerView = viewOfLayout.findViewById(R.id.recycler_view_rooms)
+        //Load data
+        RoomRestAPI()
+            .getAllRooms()
+            .enqueue(object : Callback<List<Room>> {
+                override fun onFailure(call: Call<List<Room>>?, t: Throwable?) {
+                    t!!.printStackTrace()
+                }
 
-        recyclerRooms.layoutManager = LinearLayoutManager(context!!)
-        recyclerRooms.adapter = RoomsAdapter(listRooms, context!!)
+                override fun onResponse(call: Call<List<Room>>?, response: Response<List<Room>>?) {
+                    try {
+                        if (response!!.body() == null) {
+                            Log.e("NULL_RESPONSE", "Response is null: $response")
+                        } else {
+                            response.body().forEach {
+                                //Add response item to listRooms
+                                listRooms.add(it)
+                            }
+
+                            //Build Recyclerview
+                            val recyclerRooms: RecyclerView = viewOfLayout.findViewById(R.id.recycler_view_rooms)
+                            recyclerRooms.layoutManager = LinearLayoutManager(context!!)
+                            recyclerRooms.adapter = RoomsAdapter(listRooms, context!!)
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+            })
 
         return viewOfLayout
-    }
-
-    private val listRooms: ArrayList<Room> = ArrayList()
-    private val listDevices: ArrayList<Device> = ArrayList()
-
-    //Dump Function
-    private fun addDumpsRooms() {
-        addDumpsDevices()
-
-        listRooms.add(Room(1, "Bathroom", "1 hour ago", 1, 1, 1, listDevices))
-        listRooms.add(Room(2, "BedRoom", "1 hour ago", 1, 1, 1, listDevices))
-        listRooms.add(Room(3, "Bathroom", "1 hour ago", 1, 1, 1, listDevices))
-        listRooms.add(Room(4, "Bathroom", "1 hour ago", 1, 1, 1, listDevices))
-        listRooms.add(Room(5, "Bathroom", "1 hour ago", 1, 1, 1, listDevices))
-    }
-
-    //Dump Function
-    private fun addDumpsDevices() {
-        listDevices.add(Device(1, 1, "Samsung s30 plus 4k", "tv"))
-        listDevices.add(Device(2, 1, "Phillips n35xf", "speaker"))
-        listDevices.add(Device(3, 1, "Light bulb w30n-l", "light-bulb"))
-        listDevices.add(Device(4, 1, "Unknown", "speaker"))
     }
 }

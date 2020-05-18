@@ -1,7 +1,7 @@
 package com.samuraitech.gladosapp.model
 
 data class Device(
-    val id: Int,
+    val idDevice: String,
     val roomId: Int,
     val name: String,
     val type: String
