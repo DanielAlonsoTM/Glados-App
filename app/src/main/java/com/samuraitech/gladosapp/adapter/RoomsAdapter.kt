@@ -68,13 +68,14 @@ class RoomsAdapter(private val rooms: ArrayList<Room>, val context: Context) : R
                             Log.e("NULL_RESPONSE", "Response is null: $response")
                         } else {
                             val listDevicesInRoom: ArrayList<Device> = ArrayList()
+
                             response.body().forEach {
                                 //Load al coincidences on the list
                                 listDevicesInRoom.add(it)
-
-                                //Build devices items
-                                recyclerDevices.adapter = DevicesInRoomAdapter(listDevicesInRoom, context)
                             }
+
+                            //Build devices items
+                            recyclerDevices.adapter = DevicesInRoomAdapter(listDevicesInRoom, context)
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()

@@ -52,7 +52,7 @@ class DevicesInRoomAdapter(private val devices: ArrayList<Device>, val context: 
             //Build instruction
             Thread(Runnable {
                 val instruction = Message.Instruction(
-                    device.id.toString(),
+                    device.idDevice.toString(),
                     device.roomId,
                     actionType,
                     1000
