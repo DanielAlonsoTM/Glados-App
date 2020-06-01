@@ -21,11 +21,4 @@ class Message {
         @SerializedName("title") val title: String,
         @SerializedName("content") val content: String
     )
-
-    data class Instruction(
-        @SerializedName("id_device") val id_device: String,
-        @SerializedName("id_room") val id_room: Int,
-        @SerializedName("action") val action: EnumType.ActionType,
-        @SerializedName("timeToExecute") val timeToExecute: Long
-    )
 }

@@ -1,6 +1,7 @@
 package com.samuraitech.gladosapp.api
 
 import com.samuraitech.gladosapp.model.Room
+import com.samuraitech.gladosapp.service.RoomService
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory

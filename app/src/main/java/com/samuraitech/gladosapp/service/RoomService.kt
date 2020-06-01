@@ -1,4 +1,4 @@
-package com.samuraitech.gladosapp.api
+package com.samuraitech.gladosapp.service
 
 import com.samuraitech.gladosapp.model.Room
 import retrofit2.Call
