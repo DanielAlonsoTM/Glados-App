@@ -1,6 +1,7 @@
 package com.samuraitech.gladosapp.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,14 +11,18 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.samuraitech.gladosapp.R
-import com.samuraitech.gladosapp.communication.ClientService
+import com.samuraitech.gladosapp.api.InstructionRestAPI
+import com.samuraitech.gladosapp.model.ContentInstruction
 import com.samuraitech.gladosapp.model.Device
 import com.samuraitech.gladosapp.model.EnumType.ActionType
-import com.samuraitech.gladosapp.model.Message
-import com.samuraitech.gladosapp.utils.MessagesUtils
+import com.samuraitech.gladosapp.model.Instruction
 import kotlinx.android.synthetic.main.item_device.view.*
+import retrofit2.Call
 import java.time.LocalDateTime
 import kotlin.collections.ArrayList
+import retrofit2.Callback
+import retrofit2.Response
+import java.util.*
 
 class DevicesInRoomAdapter(private val devices: ArrayList<Device>, val context: Context) :
     RecyclerView.Adapter<ViewHolderDevice>() {
@@ -51,21 +56,36 @@ class DevicesInRoomAdapter(private val devices: ArrayList<Device>, val context: 
 
             //Build instruction
             Thread(Runnable {
-                val instruction = Message.Instruction(
-                    device.idDevice.toString(),
-                    device.roomId,
-                    actionType,
-                    1000
-                )
-
-                val message = Message.Body(
-                    "A001",
+                val instruction = Instruction(
+                    "inst-${UUID.randomUUID()}",
                     LocalDateTime.now().toString(),
-                    Message.MessageType.INSTRUCTION,
-                    instruction
+                    ContentInstruction(
+                        device.idDevice,
+                        device.roomId,
+                        actionType,
+                        1000
+                    )
                 )
 
-                MessagesUtils.messageToJSONFormat(message)?.let { ClientService.sendMessageToServer(it) }
+                InstructionRestAPI()
+                    .insertInstruction(instruction).enqueue(object : Callback<Instruction> {
+                        override fun onFailure(call: Call<Instruction>?, t: Throwable?) {
+                            t!!.printStackTrace()
+                        }
+
+                        override fun onResponse(call: Call<Instruction>?, response: Response<Instruction>?) {
+                            try {
+                                if (response!!.body() == null) {
+                                    Log.e("NULL_RESPONSE", "Response is null: $response")
+                                } else {
+                                    val result = if (response.isSuccessful) "SUCCESSFUL" else "ERROR"
+                                    Log.d("RESULT_RESPONSE", result)
+                                }
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            }
+                        }
+                    })
             }).start()
         }
     }
