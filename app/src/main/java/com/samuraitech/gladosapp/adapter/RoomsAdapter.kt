@@ -109,8 +109,8 @@ class RoomsAdapter(private val rooms: ArrayList<Room>, val context: Context) : R
 }
 
 class ViewHolderRoom(view: View) : RecyclerView.ViewHolder(view) {
-    val roomName: TextView = view.text_room_name
-    val roomLastActivity: TextView = view.text_last_activity
+    val roomName: TextView = view.text_routine_name
+    val roomLastActivity: TextView = view.text_routine_room_name
     val roomTemperature: TextView = view.text_temperature
     val roomKilowatts: TextView = view.text_kilowatts
     val roomHumidity: TextView = view.text_humidity

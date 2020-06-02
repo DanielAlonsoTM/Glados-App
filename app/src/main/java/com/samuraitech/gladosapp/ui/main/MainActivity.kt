@@ -13,7 +13,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.samuraitech.gladosapp.R
-import com.samuraitech.gladosapp.fragment.ConnectFragment
+import com.samuraitech.gladosapp.fragment.RoutineFragment
 import com.samuraitech.gladosapp.fragment.HomeFragment
 import com.samuraitech.gladosapp.fragment.EventsRegisterFragment
 import com.samuraitech.gladosapp.ui.settings.SettingsActivity
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     private val requestCode = 101
 
     private val homeFragment = HomeFragment.newInstance()
-    private val connectFragment = ConnectFragment.newInstance()
+    private val connectFragment = RoutineFragment.newInstance()
     private val eventsRegisterFragment = EventsRegisterFragment.newInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {

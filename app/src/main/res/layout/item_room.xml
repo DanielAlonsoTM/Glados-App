@@ -72,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/fab_margin">
                 <TextView
-                        android:id="@+id/text_room_name"
+                        android:id="@+id/text_routine_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Room Name"
@@ -80,10 +80,10 @@
                         android:textStyle="bold"
                         android:fontFamily="@font/sen_extra_bold"/>
                 <TextView
-                        android:id="@+id/text_last_activity"
+                        android:id="@+id/text_routine_room_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/text_room_name"
+                        android:layout_below="@id/text_routine_name"
                         android:text="Last activity"
                         android:fontFamily="@font/sen_regular"/>
             </RelativeLayout>

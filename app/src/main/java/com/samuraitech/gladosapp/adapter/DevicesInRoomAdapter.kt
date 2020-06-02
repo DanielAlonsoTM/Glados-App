@@ -92,7 +92,7 @@ class DevicesInRoomAdapter(private val devices: ArrayList<Device>, val context: 
 }
 
 class ViewHolderDevice(view: View) : RecyclerView.ViewHolder(view) {
-    val deviceName: TextView = view.text_device_name
+    val deviceName: TextView = view.text_routine_device_name
     val deviceImage: ImageView = view.image_device
     val deviceSwitch: SwitchMaterial = view.switch_device
 }
