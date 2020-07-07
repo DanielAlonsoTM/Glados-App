@@ -1,13 +1,16 @@
 package com.samuraitech.gladosapp.adapter
 
 import android.content.Context
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.samuraitech.gladosapp.R
@@ -18,11 +21,11 @@ import com.samuraitech.gladosapp.model.EnumType.ActionType
 import com.samuraitech.gladosapp.model.Instruction
 import kotlinx.android.synthetic.main.item_device.view.*
 import retrofit2.Call
-import java.time.LocalDateTime
-import kotlin.collections.ArrayList
 import retrofit2.Callback
 import retrofit2.Response
+import java.time.LocalDateTime
 import java.util.*
+
 
 class DevicesInRoomAdapter(private val devices: ArrayList<Device>, val context: Context) :
     RecyclerView.Adapter<ViewHolderDevice>() {
@@ -44,7 +47,26 @@ class DevicesInRoomAdapter(private val devices: ArrayList<Device>, val context: 
 
         textViewName.text = device.name
 
-        imageViewDevice.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.icon_bulb))
+        val drawableIcon = when (device.type) {
+            "bulb" -> {
+                R.drawable.icon_bulb
+            }
+            "smart-tv" -> {
+                R.drawable.ic_action_tv
+            }
+            "bluetooth-speaker" -> {
+                R.drawable.ic_action_speaker
+            }
+            "curtains" -> {
+                R.drawable.ic_action_home
+            }
+            else -> {
+                R.drawable.icon_bulb
+            }
+        }
+
+
+        imageViewDevice.setImageDrawable(ContextCompat.getDrawable(context, drawableIcon))
 
         imageViewDevice.setColorFilter(
             ContextCompat.getColor(context, R.color.colorWhite),
@@ -64,7 +86,8 @@ class DevicesInRoomAdapter(private val devices: ArrayList<Device>, val context: 
                         device.roomId,
                         actionType,
                         1000
-                    )
+                    ),
+                    0
                 )
 
                 InstructionRestAPI()
@@ -92,7 +115,7 @@ class DevicesInRoomAdapter(private val devices: ArrayList<Device>, val context: 
 }
 
 class ViewHolderDevice(view: View) : RecyclerView.ViewHolder(view) {
-    val deviceName: TextView = view.text_routine_device_name
+    val deviceName: TextView = view.text_device_name
     val deviceImage: ImageView = view.image_device
     val deviceSwitch: SwitchMaterial = view.switch_device
 }

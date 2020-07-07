@@ -3,9 +3,9 @@
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="com.samuraitech.gladosapp.ui.main.MainActivity">
     <item android:id="@+id/bnv_connect"
-          android:title="@string/bn_connect"
+          android:title="@string/bn_routines"
           android:orderInCategory="100"
-          android:icon="@drawable/ic_action_bluetooth_connect"
+          android:icon="@drawable/ic_action_timeline"
           app:showAsAction="never"/>
     <item android:id="@+id/bnv_home"
           android:title="@string/bn_home"

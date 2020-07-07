@@ -42,12 +42,12 @@
                         android:fontFamily="@font/sen_regular"/>
                 <Switch
                         android:id="@+id/switch_button_active"
-                        android:layout_width="52dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_toEndOf="@id/text_routine_name"
-                        android:layout_marginStart="128dp"
-                        android:theme="@style/SCBSwitch"/>
+                        android:gravity="end"
+                        android:theme="@style/SCBSwitch" android:layout_marginStart="99dp"/>
                 <TextView
                         android:id="@+id/text_routine_device_name"
                         android:layout_width="131dp"

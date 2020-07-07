@@ -9,6 +9,13 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             tools:ignore="UselessParent">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin"
+                android:text="@string/routines"
+                android:textSize="28sp"
+                android:fontFamily="@font/sen_bold"/>
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_routines"
                 android:layout_width="match_parent"

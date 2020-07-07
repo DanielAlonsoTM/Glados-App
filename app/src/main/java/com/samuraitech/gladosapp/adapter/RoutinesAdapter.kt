@@ -1,6 +1,7 @@
 package com.samuraitech.gladosapp.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +11,13 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.samuraitech.gladosapp.R
+import com.samuraitech.gladosapp.api.RoomRestAPI
+import com.samuraitech.gladosapp.model.Room
 import com.samuraitech.gladosapp.model.Routine
 import kotlinx.android.synthetic.main.item_routine.view.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class RoutinesAdapter(private val routines: ArrayList<Routine>, val context: Context) :
     RecyclerView.Adapter<ViewHolderRoutine>() {
@@ -33,9 +39,33 @@ class RoutinesAdapter(private val routines: ArrayList<Routine>, val context: Con
         val buttonActiveRoutine = holderRoutine.switchActive
 
         textViewRoutineName.text = routine.name
-        textViewRoomName.text = routine.roomId.toString()
-        textViewInitTime.text = "Init time: ${routine.timeInit}"
+        textViewInitTime.text = "Start time: ${routine.timeInit}"
         textViewDeviceName.text = routine.deviceId
+
+        RoomRestAPI()
+            .getAllRooms()
+            .enqueue(object : Callback<List<Room>> {
+                override fun onFailure(call: Call<List<Room>>?, t: Throwable?) {
+                    t!!.printStackTrace()
+                }
+
+                override fun onResponse(call: Call<List<Room>>?, response: Response<List<Room>>?) {
+                    try {
+                        if (response!!.body() == null) {
+                            Log.e("NULL_RESPONSE", "Response is null: $response")
+                        } else {
+                            response.body().forEach {
+                                //Add response item to listRooms
+                                if (it.idRoom == routine.roomId) {
+                                    textViewRoomName.text = it.name
+                                }
+                            }
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+            })
 
     }
 }

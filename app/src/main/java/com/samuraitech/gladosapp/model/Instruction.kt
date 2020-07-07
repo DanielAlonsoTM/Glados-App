@@ -5,7 +5,8 @@ import com.google.gson.annotations.SerializedName
 data class Instruction(
     @SerializedName("idInstruction") val idInstruction: String,
     @SerializedName("date") val date: String,
-    @SerializedName("contentInstruction") val contentInstruction: ContentInstruction
+    @SerializedName("contentInstruction") val contentInstruction: ContentInstruction,
+    @SerializedName("executed") val executed: Int
 )
 
 data class ContentInstruction(

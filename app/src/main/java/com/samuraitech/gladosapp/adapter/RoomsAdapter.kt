@@ -42,9 +42,10 @@ class RoomsAdapter(private val rooms: ArrayList<Room>, val context: Context) : R
         val roomTemperature = "${room.temperatureCelsius} °C"
         val roomKilowatts = "${room.kilowattsConsumed} kWh"
         val roomHumidity = "${room.humidityPercent} %"
+        val roomLastActivity = "Last activity: ${room.lastActivity.substring(0, 10)}"
 
         textViewName.text = room.name
-        textViewLastActivity.text = room.lastActivity
+        textViewLastActivity.text = roomLastActivity
         textViewTemperature.text = roomTemperature
         textViewKilowattsConsumed.text = roomKilowatts
         textViewHumidity.text = roomHumidity
@@ -52,7 +53,7 @@ class RoomsAdapter(private val rooms: ArrayList<Room>, val context: Context) : R
         //Create recyclerViewDevices for every Room
         val recyclerDevices: RecyclerView = holderRoom.recyclerViewDevices
 
-        recyclerDevices.layoutManager = GridLayoutManager(context, 2, LinearLayoutManager.VERTICAL, false)
+        recyclerDevices.layoutManager = GridLayoutManager(context, 1, LinearLayoutManager.VERTICAL, false)
 
         //Load devices in list
         DeviceRestAPI()
