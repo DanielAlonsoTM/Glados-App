@@ -45,20 +45,22 @@ class ManagerRoomsAdapter(private val rooms: ArrayList<Room>, val context: Conte
             } else {
                 room.name = editTextName.text.toString()
 
-                RoomRestAPI().updateRoom(room).enqueue(object : Callback<Room> {
-                    override fun onFailure(call: Call<Room>?, t: Throwable?) {
-                        t!!.printStackTrace()
-                    }
-
-                    override fun onResponse(call: Call<Room>?, response: Response<Room>?) {
-                        if (response!!.body() == null) {
-                            Log.e("NULL_RESPONSE", "Null response: $response")
-                        } else {
-                            Toast.makeText(context, "Room edited!", Toast.LENGTH_SHORT).show()
-                            nameLayout.hint = room.name
+                RoomRestAPI()
+                    .updateRoom(room)
+                    .enqueue(object : Callback<Room> {
+                        override fun onFailure(call: Call<Room>?, t: Throwable?) {
+                            t!!.printStackTrace()
                         }
-                    }
-                })
+
+                        override fun onResponse(call: Call<Room>?, response: Response<Room>?) {
+                            if (response!!.body() == null) {
+                                Log.e("NULL_RESPONSE", "Null response: $response")
+                            } else {
+                                Toast.makeText(context, "Room edited!", Toast.LENGTH_SHORT).show()
+                                nameLayout.hint = room.name
+                            }
+                        }
+                    })
             }
         }
     }
