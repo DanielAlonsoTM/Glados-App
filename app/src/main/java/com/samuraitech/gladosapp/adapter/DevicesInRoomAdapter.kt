@@ -26,7 +26,6 @@ import retrofit2.Response
 import java.time.LocalDateTime
 import java.util.*
 
-
 class DevicesInRoomAdapter(private val devices: ArrayList<Device>, val context: Context) :
     RecyclerView.Adapter<ViewHolderDevice>() {
 

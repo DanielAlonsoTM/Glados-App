@@ -19,7 +19,7 @@
                 android:paddingEnd="35dp"
                 android:drawableStart="@drawable/ic_action_lock"
                 android:drawablePadding="@dimen/default_margin"
-                android:text="@string/security_system_status"
+                android:text="@string/rooms_devices_manager"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:fontFamily="@font/sen_regular"

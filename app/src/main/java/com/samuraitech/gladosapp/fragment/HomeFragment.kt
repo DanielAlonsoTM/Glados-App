@@ -1,5 +1,6 @@
 package com.samuraitech.gladosapp.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -13,11 +14,9 @@ import kotlin.collections.ArrayList
 
 import com.samuraitech.gladosapp.R
 import com.samuraitech.gladosapp.adapter.RoomsAdapter
-import com.samuraitech.gladosapp.api.DeviceRestAPI
 import com.samuraitech.gladosapp.api.RoomRestAPI
-import com.samuraitech.gladosapp.model.Device
 import com.samuraitech.gladosapp.model.Room
-import com.samuraitech.gladosapp.notification.NotificationManager
+import com.samuraitech.gladosapp.ui.manager.ManagerActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -38,7 +37,8 @@ class HomeFragment : Fragment() {
         btnNotification = viewOfLayout.findViewById(R.id.btn_notification_test)
 
         btnNotification.setOnClickListener {
-            NotificationManager.displayNotification(viewOfLayout.context, "Test", "test")
+//            NotificationManager.displayNotification(viewOfLayout.context, "Test", "test")
+            startActivity(Intent(context, ManagerActivity::class.java))
         }
 
         val listRooms: ArrayList<Room> = ArrayList()

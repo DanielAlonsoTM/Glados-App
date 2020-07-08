@@ -44,13 +44,19 @@
     <string name="attachment_title">Download incoming attachments</string>
     <string name="attachment_summary_on">Automatically download attachments for incoming emails</string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <string name="security_system_status">Security system enabled</string>
+    <string name="rooms_devices_manager">Rooms/Devices Manager</string>
     <string name="dump_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi semper mollis sem, non
         mollis lectus dictum ac. Suspendisse auctor vitae mauris ac rutrum. Curabitur ac tortor in est suscipit
         facilisis quis nec purus.
     </string>
+    <string name="rooms">Rooms</string>
+    <string name="devices">Devices</string>
     <string name="event_head">Event Head</string>
     <string name="events">Events</string>
     <string name="device_name">Device Name</string>
     <string name="routines">Routines</string>
+    <string name="save">Save</string>
+    <string name="room_name">Room name</string>
+    <string name="room_description">Room description</string>
+    <string name="device_type">Device type</string>
 </resources>
