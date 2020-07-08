@@ -2,6 +2,7 @@ package com.samuraitech.gladosapp.api
 
 import com.samuraitech.gladosapp.model.Device
 import com.samuraitech.gladosapp.service.DeviceService
+import com.samuraitech.gladosapp.utils.Constants
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -11,7 +12,7 @@ class DeviceRestAPI {
 
     init {
         val service = Retrofit.Builder()
-            .baseUrl("http://192.168.1.88:8080")
+            .baseUrl(Constants.baseUrl)
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
             .create(DeviceService::class.java)
