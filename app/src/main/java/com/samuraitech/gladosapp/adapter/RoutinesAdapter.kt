@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Switch
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.samuraitech.gladosapp.R
 import com.samuraitech.gladosapp.api.RoomRestAPI
+import com.samuraitech.gladosapp.api.RoutineRestAPI
 import com.samuraitech.gladosapp.model.Room
 import com.samuraitech.gladosapp.model.Routine
 import kotlinx.android.synthetic.main.item_routine.view.*
@@ -40,6 +42,7 @@ class RoutinesAdapter(private val routines: ArrayList<Routine>, val context: Con
         textViewInitTime.text = "Start time: ${routine.timeInit}"
         textViewDeviceName.text = routine.deviceId
 
+        //Get RoomsData
         RoomRestAPI()
             .getAllRooms()
             .enqueue(object : Callback<List<Room>> {
@@ -65,6 +68,42 @@ class RoutinesAdapter(private val routines: ArrayList<Routine>, val context: Con
                 }
             })
 
+        //Set checked switch buttons
+        when (routine.active) {
+            0 -> buttonActiveRoutine.isChecked = false
+            1 -> buttonActiveRoutine.isChecked = true
+        }
+
+        //PUT routines state
+        buttonActiveRoutine.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                routine.active = 1
+            } else {
+                routine.active = 0
+            }
+
+            RoutineRestAPI()
+                .updateRoutine(routine)
+                .enqueue(object : Callback<Routine> {
+                    override fun onFailure(call: Call<Routine>?, t: Throwable?) {
+                        t!!.printStackTrace()
+                    }
+
+                    override fun onResponse(call: Call<Routine>?, response: Response<Routine>?) {
+                        if (response!!.body() == null) {
+                            Log.e("NULL_RESPONSE", "Null Response: $response")
+                        } else {
+                            val message = if (routine.action == 0) {
+                                "is disable"
+                            } else {
+                                "is enable"
+                            }
+
+                            Toast.makeText(context, "Routine $message", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                })
+        }
     }
 }
 

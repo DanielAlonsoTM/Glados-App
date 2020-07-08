@@ -23,4 +23,8 @@ class RoutineRestAPI {
     fun getAllRoutines(): Call<List<Routine>> {
         return routineService.requestAllRoutines()
     }
+
+    fun updateRoutine(routine: Routine): Call<Routine> {
+        return routineService.updateRoutine(routine)
+    }
 }
