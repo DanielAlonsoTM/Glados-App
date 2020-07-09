@@ -15,6 +15,7 @@ import com.samuraitech.gladosapp.R
 import com.samuraitech.gladosapp.api.DeviceRestAPI
 import com.samuraitech.gladosapp.model.Device
 import com.samuraitech.gladosapp.model.Room
+import com.samuraitech.gladosapp.utils.Constants
 import kotlinx.android.synthetic.main.item_room.view.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -66,7 +67,7 @@ class RoomsAdapter(private val rooms: ArrayList<Room>, val context: Context) : R
                 override fun onResponse(call: Call<List<Device>>?, response: Response<List<Device>>?) {
                     try {
                         if (response!!.body() == null) {
-                            Log.e("NULL_RESPONSE", "Response is null: $response")
+                            Log.e(Constants.TAG_NULL_RESPONSE, "$response")
                         } else {
                             val listDevicesInRoom: ArrayList<Device> = ArrayList()
 

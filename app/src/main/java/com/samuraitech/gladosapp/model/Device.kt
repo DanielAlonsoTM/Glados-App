@@ -6,6 +6,6 @@ data class Device(
     @SerializedName("idDocument") val idDocument: String,
     @SerializedName("idDevice") val idDevice: String,
     @SerializedName("roomId") val roomId: Int,
-    @SerializedName("name") val name: String,
-    @SerializedName("type") val type: String
+    @SerializedName("name") var name: String,
+    @SerializedName("type") var type: String
 )

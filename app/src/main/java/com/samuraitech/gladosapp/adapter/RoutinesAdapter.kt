@@ -14,6 +14,7 @@ import com.samuraitech.gladosapp.api.RoomRestAPI
 import com.samuraitech.gladosapp.api.RoutineRestAPI
 import com.samuraitech.gladosapp.model.Room
 import com.samuraitech.gladosapp.model.Routine
+import com.samuraitech.gladosapp.utils.Constants
 import kotlinx.android.synthetic.main.item_routine.view.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -91,7 +92,7 @@ class RoutinesAdapter(private val routines: ArrayList<Routine>, val context: Con
 
                     override fun onResponse(call: Call<Routine>?, response: Response<Routine>?) {
                         if (response!!.body() == null) {
-                            Log.e("NULL_RESPONSE", "Null Response: $response")
+                            Log.e(Constants.TAG_NULL_RESPONSE, "$response")
                         } else {
                             val message = if (routine.action == 0) {
                                 "is disable"

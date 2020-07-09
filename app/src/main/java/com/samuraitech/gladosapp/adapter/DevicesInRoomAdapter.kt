@@ -19,6 +19,7 @@ import com.samuraitech.gladosapp.model.ContentInstruction
 import com.samuraitech.gladosapp.model.Device
 import com.samuraitech.gladosapp.model.EnumType.ActionType
 import com.samuraitech.gladosapp.model.Instruction
+import com.samuraitech.gladosapp.utils.Constants
 import kotlinx.android.synthetic.main.item_device.view.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -78,6 +79,7 @@ class DevicesInRoomAdapter(private val devices: ArrayList<Device>, val context: 
             //Build instruction
             Thread(Runnable {
                 val instruction = Instruction(
+                    "0",
                     "inst-${UUID.randomUUID()}",
                     LocalDateTime.now().toString(),
                     ContentInstruction(
@@ -98,7 +100,7 @@ class DevicesInRoomAdapter(private val devices: ArrayList<Device>, val context: 
                         override fun onResponse(call: Call<Instruction>?, response: Response<Instruction>?) {
                             try {
                                 if (response!!.body() == null) {
-                                    Log.e("NULL_RESPONSE", "Response is null: $response")
+                                    Log.e(Constants.TAG_NULL_RESPONSE, "$response")
                                 } else {
                                     val result = if (response.isSuccessful) "SUCCESSFUL" else "ERROR"
                                     Log.d("RESULT_RESPONSE", result)

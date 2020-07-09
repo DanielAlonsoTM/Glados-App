@@ -27,5 +27,9 @@ class DeviceRestAPI {
     fun getByRoomId(roomId: Int): Call<List<Device>> {
         return deviceService.requestByRoomId(roomId)
     }
+
+    fun updateDevice(device: Device): Call<Device> {
+        return deviceService.updateDevice(device)
+    }
 }
 
