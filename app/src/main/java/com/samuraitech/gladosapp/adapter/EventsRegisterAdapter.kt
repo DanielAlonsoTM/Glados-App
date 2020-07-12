@@ -19,7 +19,9 @@ class EventRegistersAdapter(private val eventRegisters: ArrayList<EventRegister>
     RecyclerView.Adapter<ViewHolderEventRegister>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderEventRegister {
-        return ViewHolderEventRegister(LayoutInflater.from(context).inflate(R.layout.item_event_register, parent, false))
+        return ViewHolderEventRegister(
+            LayoutInflater.from(context).inflate(R.layout.item_event_register, parent, false)
+        )
     }
 
     override fun getItemCount(): Int {
@@ -34,17 +36,18 @@ class EventRegistersAdapter(private val eventRegisters: ArrayList<EventRegister>
         val textViewContent = holder.eventRegisterContent
         val iconEventRegister = holder.eventRegisterIcon
 
-        textViewHeader.text = eventRegister.header
-        textViewContent.text = eventRegister.content
-        iconEventRegister.setImageDrawable(eventRegister.drawable)
+        textViewHeader.text = eventRegister.title
+        textViewContent.text = eventRegister.description
+//        iconEventRegister.setImageDrawable(eventRegister.drawable)
 
         // Set background view
         val drawableBackground: Drawable
 
         drawableBackground = when (eventRegister.type) {
-            EventType.NORMAL -> ContextCompat.getDrawable(context, R.drawable.event_register_normal)!!
-            EventType.WARNING -> ContextCompat.getDrawable(context, R.drawable.event_register_warning)!!
-            EventType.ERROR -> ContextCompat.getDrawable(context, R.drawable.event_register_error)!!
+            "NORMAL" -> ContextCompat.getDrawable(context, R.drawable.event_register_normal)!!
+            "WARNING" -> ContextCompat.getDrawable(context, R.drawable.event_register_warning)!!
+            "ERROR" -> ContextCompat.getDrawable(context, R.drawable.event_register_error)!!
+            else -> ContextCompat.getDrawable(context, R.drawable.event_register_error)!!
         }
 
         viewParent.background = drawableBackground

@@ -59,4 +59,5 @@
     <string name="room_name">Room name</string>
     <string name="room_description">Room description</string>
     <string name="device_type">Device type</string>
+    <string name="delete">Delete</string>
 </resources>

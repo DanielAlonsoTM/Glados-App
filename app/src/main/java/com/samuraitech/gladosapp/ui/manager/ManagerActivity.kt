@@ -4,6 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
+import android.widget.ImageView
+import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.samuraitech.gladosapp.R
@@ -26,6 +30,59 @@ class ManagerActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        val linearLayoutRoom: LinearLayout = findViewById(R.id.linear_layout_room)
+        val linearLayoutDevice: LinearLayout = findViewById(R.id.linear_layout_device)
+        val imageViewRoom: ImageView = findViewById(R.id.image_linear_layout_room)
+        val imageViewDevice: ImageView = findViewById(R.id.image_linear_layout_device)
+
+        val recyclerRooms: RecyclerView = findViewById(R.id.recycler_view_manager_rooms)
+        val recyclerDevices: RecyclerView = findViewById(R.id.recycler_view_manager_devices)
+
+        //Set initial visibility of recycler views
+        recyclerRooms.visibility = View.GONE
+        recyclerDevices.visibility = View.GONE
+
+        linearLayoutRoom.setOnClickListener {
+            if (recyclerRooms.visibility == View.GONE) {
+                recyclerRooms.visibility = View.VISIBLE
+                imageViewRoom.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        applicationContext,
+                        R.drawable.ic_action_keyboard_arrow_up
+                    )
+                )
+            } else {
+                recyclerRooms.visibility = View.GONE
+                imageViewRoom.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        applicationContext,
+                        R.drawable.ic_action_keyboard_arrow_down
+                    )
+                )
+            }
+        }
+
+        linearLayoutDevice.setOnClickListener {
+            if (recyclerDevices.visibility == View.GONE) {
+                recyclerDevices.visibility = View.VISIBLE
+                imageViewDevice.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        applicationContext,
+                        R.drawable.ic_action_keyboard_arrow_up
+                    )
+                )
+
+            } else {
+                recyclerDevices.visibility = View.GONE
+                imageViewDevice.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        applicationContext,
+                        R.drawable.ic_action_keyboard_arrow_down
+                    )
+                )
+            }
+        }
+
         val listRooms = ArrayList<Room>()
         val listDevices = ArrayList<Device>()
 
@@ -47,7 +104,6 @@ class ManagerActivity : AppCompatActivity() {
                             }
 
                             //Build RecyclerView
-                            val recyclerRooms: RecyclerView = findViewById(R.id.recycler_view_manager_rooms)
                             recyclerRooms.layoutManager = LinearLayoutManager(this@ManagerActivity)
                             recyclerRooms.adapter = ManagerRoomsAdapter(listRooms, this@ManagerActivity)
                         }
@@ -67,14 +123,13 @@ class ManagerActivity : AppCompatActivity() {
 
                 override fun onResponse(call: Call<List<Device>>?, response: Response<List<Device>>?) {
                     try {
-                        if (response!!.body() == null){
+                        if (response!!.body() == null) {
                             Log.e("NULL_RESPONSE", "Response is null: $response")
                         } else {
                             response.body().forEach {
                                 listDevices.add(it)
                             }
 
-                            val recyclerDevices: RecyclerView = findViewById(R.id.recycler_view_manager_devices)
                             recyclerDevices.layoutManager = LinearLayoutManager(this@ManagerActivity)
                             recyclerDevices.adapter = ManagerDeviceAdapter(listDevices, this@ManagerActivity)
                         }
