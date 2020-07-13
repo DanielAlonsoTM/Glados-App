@@ -88,7 +88,6 @@ class ManagerDeviceAdapter(private val devices: ArrayList<Device>, val context: 
                     dataAdapterRoom.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                     spinnerRoom.adapter = dataAdapterRoom
 
-
                     //Set position spinnerRoom
                     var spinnerRoomPosition = 0
 

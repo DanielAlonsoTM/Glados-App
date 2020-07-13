@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import kotlin.collections.ArrayList
 
 import com.samuraitech.gladosapp.R
@@ -17,6 +18,7 @@ import com.samuraitech.gladosapp.adapter.RoomsAdapter
 import com.samuraitech.gladosapp.api.RoomRestAPI
 import com.samuraitech.gladosapp.model.Room
 import com.samuraitech.gladosapp.ui.manager.ManagerActivity
+import com.samuraitech.gladosapp.utils.Constants
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,10 +28,7 @@ class HomeFragment : Fragment() {
         fun newInstance(): HomeFragment = HomeFragment()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val viewOfLayout = inflater.inflate(R.layout.fragment_home, container, false)
 
@@ -43,7 +42,25 @@ class HomeFragment : Fragment() {
 
         val listRooms: ArrayList<Room> = ArrayList()
 
+        //Build Recyclerview
+        val recyclerRooms: RecyclerView = viewOfLayout.findViewById(R.id.recycler_view_rooms)
+
         //Load data
+        loadData(listRooms, recyclerRooms)
+
+        //Refresh layout
+        val swipeRefresh: SwipeRefreshLayout = viewOfLayout.findViewById(R.id.swipe_refresh_home)
+
+        swipeRefresh.setOnRefreshListener {
+            listRooms.clear()
+            loadData(listRooms, recyclerRooms)
+            swipeRefresh.isRefreshing = false
+        }
+
+        return viewOfLayout
+    }
+
+    private fun loadData(listRooms: ArrayList<Room>, recyclerRooms: RecyclerView) {
         RoomRestAPI()
             .getAllRooms()
             .enqueue(object : Callback<List<Room>> {
@@ -54,15 +71,13 @@ class HomeFragment : Fragment() {
                 override fun onResponse(call: Call<List<Room>>?, response: Response<List<Room>>?) {
                     try {
                         if (response!!.body() == null) {
-                            Log.e("NULL_RESPONSE", "Response is null: $response")
+                            Log.e(Constants.TAG_NULL_RESPONSE, "$response")
                         } else {
                             response.body().forEach {
                                 //Add response item to listRooms
                                 listRooms.add(it)
                             }
 
-                            //Build Recyclerview
-                            val recyclerRooms: RecyclerView = viewOfLayout.findViewById(R.id.recycler_view_rooms)
                             recyclerRooms.layoutManager = LinearLayoutManager(context!!)
                             recyclerRooms.adapter = RoomsAdapter(listRooms, context!!)
                         }
@@ -71,7 +86,5 @@ class HomeFragment : Fragment() {
                     }
                 }
             })
-
-        return viewOfLayout
     }
 }
