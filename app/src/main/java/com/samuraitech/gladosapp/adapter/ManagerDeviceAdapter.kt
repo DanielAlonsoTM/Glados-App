@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputLayout
 import com.samuraitech.gladosapp.R
 import com.samuraitech.gladosapp.api.DeviceRestAPI
+import com.samuraitech.gladosapp.api.RoomRestAPI
 import com.samuraitech.gladosapp.model.Device
+import com.samuraitech.gladosapp.model.Room
 import com.samuraitech.gladosapp.utils.Constants
 import kotlinx.android.synthetic.main.item_editable_device.view.*
 import retrofit2.Call
@@ -34,12 +36,12 @@ class ManagerDeviceAdapter(private val devices: ArrayList<Device>, val context: 
         val device = devices[position]
 
         val nameLayout = holder.deviceNameLayout
-
         val editTextName = holder.deviceName
-
-        val spinner = holder.spinnerType
         val saveButton = holder.buttonSave
+        val spinnerType = holder.spinnerType
+        val spinnerRoom = holder.spinnerRoom
 
+        //Set spinnerType Adapter
         val categories: MutableList<String> = ArrayList()
         categories.add("Curtains")
         categories.add("Bluetooth Speaker")
@@ -47,17 +49,59 @@ class ManagerDeviceAdapter(private val devices: ArrayList<Device>, val context: 
         categories.add("Bulb")
         categories.add("Microwave")
 
-        val dataAdapter: ArrayAdapter<String> = ArrayAdapter(
+        //Build adapter spinnerType
+        val dataAdapterType: ArrayAdapter<String> = ArrayAdapter(
             context,
             R.layout.item_spinner_custom,
-            categories)
+            categories
+        )
+        dataAdapterType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerType.adapter = dataAdapterType
 
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        //Set position spinnerType
+        val spinnerTypePosition = dataAdapterType.getPosition(device.type)
+        spinnerType.setSelection(spinnerTypePosition)
 
-        val spinnerPosition = dataAdapter.getPosition(device.type)
+        //Set spinnerRoom Adapter
+        RoomRestAPI().getAllRooms().enqueue(object : Callback<List<Room>> {
+            override fun onFailure(call: Call<List<Room>>?, t: Throwable?) {
+                t!!.printStackTrace()
+                Toast.makeText(context, "Is not possible load rooms", Toast.LENGTH_SHORT).show()
+            }
 
-        spinner.adapter = dataAdapter
-        spinner.setSelection(spinnerPosition)
+            override fun onResponse(call: Call<List<Room>>?, response: Response<List<Room>>?) {
+                if (response!!.body() == null) {
+                    Log.e(Constants.TAG_NULL_RESPONSE, "$response")
+                    Toast.makeText(context, "Is not possible load rooms", Toast.LENGTH_SHORT).show()
+                } else {
+                    val listRooms: ArrayList<String> = ArrayList()
+
+                    response.body().forEach {
+                        listRooms.add("${it.idRoom}. ${it.name}")
+                    }
+
+                    //Build adapter spinnerRoom
+                    val dataAdapterRoom: ArrayAdapter<String> = ArrayAdapter(
+                        context, R.layout.item_spinner_custom,
+                        listRooms
+                    )
+                    dataAdapterRoom.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    spinnerRoom.adapter = dataAdapterRoom
+
+
+                    //Set position spinnerRoom
+                    var spinnerRoomPosition = 0
+
+                    response.body().forEach {
+                        if (it.idRoom == device.roomId) {
+                            spinnerRoomPosition = dataAdapterRoom.getPosition("${it.idRoom}. ${it.name}")
+                        }
+                    }
+
+                    spinnerRoom.setSelection(spinnerRoomPosition)
+                }
+            }
+        })
 
         nameLayout.hint = device.name
 
@@ -66,6 +110,10 @@ class ManagerDeviceAdapter(private val devices: ArrayList<Device>, val context: 
                 device.name = editTextName.text.toString()
             }
 
+            device.roomId = spinnerRoom.selectedItem.toString().filter { it.isDigit() }.toInt()
+            device.type = spinnerType.selectedItem.toString()
+
+            //Update device
             DeviceRestAPI()
                 .updateDevice(device)
                 .enqueue(object : Callback<Device> {
@@ -94,6 +142,7 @@ class ViewHolderManagerDevices(view: View) : RecyclerView.ViewHolder(view) {
     val deviceName: EditText = view.input_device_name
 
     val spinnerType: Spinner = view.spinner_type
+    val spinnerRoom: Spinner = view.spinner_room
 
     val buttonSave: Button = view.button_device_save
 }
