@@ -33,7 +33,7 @@
                     android:textSize="18sp"
                     android:maxLines="1"
                     android:maxLength="16"
-                    android:fontFamily="@font/sen_bold"
+                    android:fontFamily="@font/sen_regular"
                     android:layout_gravity="center_vertical"
                     android:layout_toEndOf="@+id/image_device"
                     android:layout_toStartOf="@+id/switch_device"

@@ -48,20 +48,20 @@ class DevicesInRoomAdapter(private val devices: ArrayList<Device>, val context: 
         textViewName.text = device.name
 
         val drawableIcon = when (device.type) {
-            "bulb" -> {
+            "Bulb" -> {
                 R.drawable.icon_bulb
             }
-            "smart-tv" -> {
+            "Smart Tv" -> {
                 R.drawable.ic_action_tv
             }
-            "bluetooth-speaker" -> {
+            "Bluetooth Speaker" -> {
                 R.drawable.ic_action_speaker
             }
-            "curtains" -> {
+            "Curtains" -> {
                 R.drawable.ic_action_home
             }
             else -> {
-                R.drawable.icon_bulb
+                R.drawable.ic_action_warning
             }
         }
 
