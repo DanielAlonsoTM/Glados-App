@@ -8,10 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.samuraitech.gladosapp.R
 import com.samuraitech.gladosapp.api.InstructionRestAPI
@@ -29,6 +31,8 @@ import java.util.*
 
 class DevicesInRoomAdapter(private val devices: ArrayList<Device>, val context: Context) :
     RecyclerView.Adapter<ViewHolderDevice>() {
+
+    val account = GoogleSignIn.getLastSignedInAccount(context)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderDevice {
         return ViewHolderDevice(LayoutInflater.from(context).inflate(R.layout.item_device, parent, false))
@@ -78,40 +82,49 @@ class DevicesInRoomAdapter(private val devices: ArrayList<Device>, val context: 
 
             //Build instruction
             Thread(Runnable {
-                val instruction = Instruction(
-                    "0",
-                    "inst-${UUID.randomUUID()}",
-                    LocalDateTime.now().toString(),
-                    ContentInstruction(
-                        device.idDevice,
-                        device.roomId,
-                        actionType,
-                        1000
-                    ),
-                    0
-                )
+                if (account == null) {
+                    Toast.makeText(context, "It's not possible execute this", Toast.LENGTH_SHORT).show()
+                } else {
+                    val instruction = Instruction(
+                        "0",
+                        "inst-${UUID.randomUUID()}",
+                        account.id!!,
+                        LocalDateTime.now().toString(),
+                        ContentInstruction(
+                            device.idDevice,
+                            device.roomId,
+                            actionType,
+                            1000
+                        ),
+                        0
+                    )
 
-                InstructionRestAPI()
-                    .insertInstruction(instruction).enqueue(object : Callback<Instruction> {
-                        override fun onFailure(call: Call<Instruction>?, t: Throwable?) {
-                            t!!.printStackTrace()
-                        }
-
-                        override fun onResponse(call: Call<Instruction>?, response: Response<Instruction>?) {
-                            try {
-                                if (response!!.body() == null) {
-                                    Log.e(Constants.TAG_NULL_RESPONSE, "$response")
-                                } else {
-                                    val result = if (response.isSuccessful) "SUCCESSFUL" else "ERROR"
-                                    Log.d("RESULT_RESPONSE", result)
-                                }
-                            } catch (e: Exception) {
-                                e.printStackTrace()
-                            }
-                        }
-                    })
+                    insertInstruction(instruction)
+                }
             }).start()
         }
+    }
+
+    private fun insertInstruction(instruction: Instruction) {
+        InstructionRestAPI()
+            .insertInstruction(instruction).enqueue(object : Callback<Instruction> {
+                override fun onFailure(call: Call<Instruction>?, t: Throwable?) {
+                    t!!.printStackTrace()
+                }
+
+                override fun onResponse(call: Call<Instruction>?, response: Response<Instruction>?) {
+                    try {
+                        if (response!!.body() == null) {
+                            Log.e(Constants.TAG_NULL_RESPONSE, "$response")
+                        } else {
+                            val result = if (response.isSuccessful) "SUCCESSFUL" else "ERROR"
+                            Log.d("RESULT_RESPONSE", result)
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+            })
     }
 }
 

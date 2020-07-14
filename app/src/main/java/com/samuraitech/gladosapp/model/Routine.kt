@@ -11,5 +11,6 @@ data class Routine(
     @SerializedName("precision") val precision: Float,
     @SerializedName("timeInit") val timeInit: String,
     @SerializedName("active") var active: Int,
-    @SerializedName("roomId") val roomId: Int
+    @SerializedName("roomId") val roomId: Int,
+    @SerializedName("userId") val userId:String
 )

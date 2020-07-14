@@ -13,9 +13,15 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.samuraitech.gladosapp.R
+import com.samuraitech.gladosapp.api.UserRestAPI
+import com.samuraitech.gladosapp.model.User
 import com.samuraitech.gladosapp.ui.main.MainActivity
+import com.samuraitech.gladosapp.utils.Constants
 import com.samuraitech.gladosapp.utils.Constants.RC_SIGN_IN
 import com.samuraitech.gladosapp.utils.GraphicsUtilities.makeTransparentActionBar
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class LoginActivity : AppCompatActivity() {
@@ -51,7 +57,30 @@ class LoginActivity : AppCompatActivity() {
         val account = GoogleSignIn.getLastSignedInAccount(this)
 
         if (account != null) {
+            insertUser(account)
+
             startActivity(Intent(this, MainActivity::class.java))
+        }
+    }
+
+    private fun insertUser(account: GoogleSignInAccount) {
+        try {
+            val user = User("", account.id!!, account.displayName!!, account.email!!)
+            UserRestAPI().insertUser(user).enqueue(object : Callback<User> {
+                override fun onFailure(call: Call<User>?, t: Throwable?) {
+                    t!!.printStackTrace()
+                }
+
+                override fun onResponse(call: Call<User>?, response: Response<User>?) {
+                    if (response!!.body() == null) {
+                        Log.e(Constants.TAG_NULL_RESPONSE, "$response")
+                    } else {
+                        Log.d("RESPONSE", "$response")
+                    }
+                }
+            })
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
@@ -75,8 +104,6 @@ class LoginActivity : AppCompatActivity() {
         try {
             val account = completedTask.getResult(ApiException::class.java)
 
-            // Signed in successfully, show authenticated UI.
-//            updateUI(account)
             startActivity(Intent(this, MainActivity::class.java))
         } catch (e: ApiException) {
             // The ApiException status code indicates the detailed failure reason.
