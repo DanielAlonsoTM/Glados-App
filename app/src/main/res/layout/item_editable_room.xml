@@ -15,45 +15,47 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/default_margin"
-                android:background="@drawable/gradient_lawrencium">
-            <Button
-                    android:id="@+id/button_room_save"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginBottom="@dimen/default_margin"
-                    android:background="@drawable/gradient_emeral_water"
-                    android:hint="@string/save"
-                    android:textColorHint="@color/colorWhite"
-                    android:fontFamily="@font/fonarto_light"
-                    tools:ignore="RelativeOverlap"/>
-            <Button
-                    android:id="@+id/button_room_delete"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_below="@+id/button_room_save"
-                    android:background="@drawable/gradient_red"
-                    android:hint="@string/delete"
-                    android:textColorHint="@color/colorWhite"
-                    android:fontFamily="@font/fonarto_light"
-                    tools:ignore="RelativeOverlap"/>
-
+                android:background="@drawable/gradient_night_hawk">
 
             <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/edit_room_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toStartOf="@id/button_room_save"
                     android:layout_marginEnd="@dimen/default_margin"
+                    android:layout_marginBottom="@dimen/default_margin"
                     android:hint="@string/room_name"
                     android:textColorHint="@color/colorWhite">
                 <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/input_room_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/colorWhite"
                         android:fontFamily="@font/sen_bold"/>
             </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                    android:id="@+id/button_room_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edit_room_name"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    android:background="@drawable/gradient_quepal"
+                    android:hint="@string/save"
+                    android:textColorHint="@color/colorWhite"
+                    android:fontFamily="@font/fonarto_bold"
+                    tools:ignore="RelativeOverlap"/>
+            <Button
+                    android:id="@+id/button_room_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/edit_room_name"
+                    android:background="@drawable/gradient_namn"
+                    android:hint="@string/delete"
+                    android:textColorHint="@color/colorWhite"
+                    android:fontFamily="@font/fonarto_bold"
+                    tools:ignore="RelativeOverlap"/>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
