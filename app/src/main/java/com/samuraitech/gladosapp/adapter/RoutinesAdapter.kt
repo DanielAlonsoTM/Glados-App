@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
@@ -38,6 +39,7 @@ class RoutinesAdapter(private val routines: ArrayList<Routine>, val context: Con
         val textViewDeviceName = holderRoutine.routineDeviceName
         val textViewInitTime = holderRoutine.routineInitTime
         val buttonActiveRoutine = holderRoutine.switchActive
+        val buttonDelete = holderRoutine.buttonDeleteRoutine
 
         textViewRoutineName.text = routine.name
         textViewInitTime.text = "Start time: ${routine.timeInit}"
@@ -77,34 +79,66 @@ class RoutinesAdapter(private val routines: ArrayList<Routine>, val context: Con
 
         //PUT routines state
         buttonActiveRoutine.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                routine.active = 1
-            } else {
-                routine.active = 0
-            }
-
-            RoutineRestAPI()
-                .updateRoutine(routine)
-                .enqueue(object : Callback<Routine> {
-                    override fun onFailure(call: Call<Routine>?, t: Throwable?) {
-                        t!!.printStackTrace()
-                    }
-
-                    override fun onResponse(call: Call<Routine>?, response: Response<Routine>?) {
-                        if (response!!.body() == null) {
-                            Log.e(Constants.TAG_NULL_RESPONSE, "$response")
-                        } else {
-                            val message = if (routine.action == 0) {
-                                "is disable"
-                            } else {
-                                "is enable"
-                            }
-
-                            Toast.makeText(context, "Routine $message", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                })
+            setStateRoutine(isChecked, routine)
         }
+
+        buttonDelete.setOnClickListener {
+            deleteRoutine(routine, position)
+        }
+    }
+
+    private fun deleteRoutine(routine: Routine, position: Int) {
+        RoutineRestAPI()
+            .deleteRoutine(routine.idDocument)
+            .enqueue(object : Callback<Routine> {
+                override fun onFailure(call: Call<Routine>?, t: Throwable?) {
+                    t!!.printStackTrace()
+                    Toast.makeText(context, "It's not possible delete routine", Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onResponse(call: Call<Routine>?, response: Response<Routine>?) {
+                    if (response!!.body() == null) {
+                        Log.e(Constants.TAG_NULL_RESPONSE, "$response")
+                        Toast.makeText(context, "It's not possible delete routine", Toast.LENGTH_SHORT).show()
+                    } else {
+                        routines.removeAt(position)
+                        notifyItemRemoved(position)
+                        notifyItemRangeChanged(position, itemCount)
+
+                        Toast.makeText(context, "Routine deleted", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            })
+    }
+
+    private fun setStateRoutine(isChecked: Boolean, routine: Routine) {
+        if (isChecked) {
+            routine.active = 1
+        } else {
+            routine.active = 0
+        }
+
+        RoutineRestAPI()
+            .updateRoutine(routine)
+            .enqueue(object : Callback<Routine> {
+                override fun onFailure(call: Call<Routine>?, t: Throwable?) {
+                    t!!.printStackTrace()
+                }
+
+                override fun onResponse(call: Call<Routine>?, response: Response<Routine>?) {
+                    if (response!!.body() == null) {
+                        Log.e(Constants.TAG_NULL_RESPONSE, "$response")
+                    } else {
+                        val message = if (routine.action == 0) {
+                            "is disable"
+                        } else {
+                            "is enable"
+                        }
+
+                        Toast.makeText(context, "Routine $message", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            })
     }
 }
 
@@ -114,4 +148,5 @@ class ViewHolderRoutine(view: View) : RecyclerView.ViewHolder(view) {
     val routineInitTime: TextView = view.text_init_time
     val switchActive: Switch = view.switch_button_active
     val routineDeviceName: TextView = view.text_routine_device_name
+    val buttonDeleteRoutine: Button = view.button_routine_delete
 }

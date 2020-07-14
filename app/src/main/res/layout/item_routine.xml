@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
+              xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
     <androidx.cardview.widget.CardView
@@ -17,12 +17,13 @@
             <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/fab_margin">
+                    android:layout_margin="@dimen/fab_margin"
+                    tools:ignore="UselessParent">
                 <TextView
                         android:id="@+id/text_routine_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Routine Name"
+                        android:text="@string/routine_name"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:fontFamily="@font/sen_extra_bold"/>
@@ -31,14 +32,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/text_routine_name"
-                        android:text="Room Name"
+                        android:text="@string/room_name"
                         android:fontFamily="@font/sen_bold"/>
                 <TextView
                         android:id="@+id/text_init_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/text_routine_room_name"
-                        android:text="Init Time"
+                        android:text="@string/init_time"
                         android:fontFamily="@font/sen_regular"/>
                 <Switch
                         android:id="@+id/switch_button_active"
@@ -52,13 +53,25 @@
                         android:id="@+id/text_routine_device_name"
                         android:layout_width="131dp"
                         android:layout_height="wrap_content"
-                        android:text="Device Name"
+                        android:text="@string/device_name"
                         android:fontFamily="@font/open_sans_regular"
                         android:gravity="end"
                         android:layout_toEndOf="@id/text_init_time"
                         android:layout_below="@id/text_routine_room_name"
                         android:layout_alignParentEnd="true"
                         android:layout_marginStart="50dp"/>
+
+                <Button
+                        android:id="@+id/button_routine_delete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/text_init_time"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:background="@drawable/gradient_namn"
+                        android:hint="@string/delete"
+                        android:textColorHint="@color/colorWhite"
+                        android:fontFamily="@font/fonarto_bold"/>
             </RelativeLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
