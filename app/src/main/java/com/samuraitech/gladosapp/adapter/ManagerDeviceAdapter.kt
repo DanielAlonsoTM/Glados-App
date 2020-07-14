@@ -38,6 +38,7 @@ class ManagerDeviceAdapter(private val devices: ArrayList<Device>, val context: 
         val nameLayout = holder.deviceNameLayout
         val editTextName = holder.deviceName
         val saveButton = holder.buttonSave
+        val deleteButton = holder.buttonDelete
         val spinnerType = holder.spinnerType
         val spinnerRoom = holder.spinnerRoom
 
@@ -63,6 +64,73 @@ class ManagerDeviceAdapter(private val devices: ArrayList<Device>, val context: 
         spinnerType.setSelection(spinnerTypePosition)
 
         //Set spinnerRoom Adapter
+        loadDataRoomInSpinner(spinnerRoom, device)
+
+        nameLayout.hint = device.name
+
+        saveButton.setOnClickListener {
+            if (editTextName.text.isNotEmpty()) {
+                device.name = editTextName.text.toString()
+            }
+
+            device.roomId = spinnerRoom.selectedItem.toString().filter { it.isDigit() }.toInt()
+            device.type = spinnerType.selectedItem.toString()
+
+            //Update device
+            updateDevice(device, nameLayout)
+        }
+
+        deleteButton.setOnClickListener {
+            deleteDevice(device, position)
+        }
+    }
+
+    private fun deleteDevice(device: Device, position: Int) {
+        DeviceRestAPI()
+            .deleteDevice(device)
+            .enqueue(object : Callback<Device> {
+                override fun onFailure(call: Call<Device>?, t: Throwable?) {
+                    t!!.printStackTrace()
+                    Toast.makeText(context, "It's not possible delete this device", Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onResponse(call: Call<Device>?, response: Response<Device>?) {
+                    if (response!!.body() == null) {
+                        Log.e(Constants.TAG_NULL_RESPONSE, "$response")
+                        Toast.makeText(context, "It's not possible delete this device", Toast.LENGTH_SHORT)
+                    } else {
+                        devices.removeAt(position)
+                        notifyItemRemoved(position)
+                        notifyItemRangeChanged(position, itemCount)
+
+                        Toast.makeText(context, "Device deleted", Toast.LENGTH_SHORT)
+                    }
+                }
+            })
+    }
+
+    private fun updateDevice(device: Device, nameLayout: TextInputLayout) {
+        DeviceRestAPI()
+            .updateDevice(device)
+            .enqueue(object : Callback<Device> {
+                override fun onFailure(call: Call<Device>?, t: Throwable?) {
+                    t!!.printStackTrace()
+                    Toast.makeText(context, "Is not possible update device", Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onResponse(call: Call<Device>?, response: Response<Device>?) {
+                    if (response!!.body() == null) {
+                        Log.e(Constants.TAG_NULL_RESPONSE, "$response")
+                    } else {
+                        Toast.makeText(context, "Device updated!", Toast.LENGTH_SHORT).show()
+
+                        nameLayout.hint = device.name
+                    }
+                }
+            })
+    }
+
+    private fun loadDataRoomInSpinner(spinnerRoom: Spinner, device: Device) {
         RoomRestAPI().getAllRooms().enqueue(object : Callback<List<Room>> {
             override fun onFailure(call: Call<List<Room>>?, t: Throwable?) {
                 t!!.printStackTrace()
@@ -101,37 +169,6 @@ class ManagerDeviceAdapter(private val devices: ArrayList<Device>, val context: 
                 }
             }
         })
-
-        nameLayout.hint = device.name
-
-        saveButton.setOnClickListener {
-            if (editTextName.text.isNotEmpty()) {
-                device.name = editTextName.text.toString()
-            }
-
-            device.roomId = spinnerRoom.selectedItem.toString().filter { it.isDigit() }.toInt()
-            device.type = spinnerType.selectedItem.toString()
-
-            //Update device
-            DeviceRestAPI()
-                .updateDevice(device)
-                .enqueue(object : Callback<Device> {
-                    override fun onFailure(call: Call<Device>?, t: Throwable?) {
-                        t!!.printStackTrace()
-                        Toast.makeText(context, "Is not possible update device", Toast.LENGTH_SHORT).show()
-                    }
-
-                    override fun onResponse(call: Call<Device>?, response: Response<Device>?) {
-                        if (response!!.body() == null) {
-                            Log.e(Constants.TAG_NULL_RESPONSE, "$response")
-                        } else {
-                            Toast.makeText(context, "Device updated!", Toast.LENGTH_SHORT).show()
-
-                            nameLayout.hint = device.name
-                        }
-                    }
-                })
-        }
     }
 }
 
@@ -144,4 +181,5 @@ class ViewHolderManagerDevices(view: View) : RecyclerView.ViewHolder(view) {
     val spinnerRoom: Spinner = view.spinner_room
 
     val buttonSave: Button = view.button_device_save
+    val buttonDelete: Button = view.button_device_delete
 }

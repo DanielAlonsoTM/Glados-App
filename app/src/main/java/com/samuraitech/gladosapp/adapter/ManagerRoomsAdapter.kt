@@ -37,6 +37,7 @@ class ManagerRoomsAdapter(private val rooms: ArrayList<Room>, val context: Conte
         val nameLayout = holder.roomNameLayout
         val editTextName = holder.roomName
         val saveButton = holder.saveButton
+        val deleteButton = holder.deleteButton
 
         nameLayout.hint = room.name
 
@@ -44,25 +45,55 @@ class ManagerRoomsAdapter(private val rooms: ArrayList<Room>, val context: Conte
             if (editTextName.text.isNotEmpty()) {
                 room.name = editTextName.text.toString()
             }
-
-            RoomRestAPI()
-                .updateRoom(room)
-                .enqueue(object : Callback<Room> {
-                    override fun onFailure(call: Call<Room>?, t: Throwable?) {
-                        t!!.printStackTrace()
-                    }
-
-                    override fun onResponse(call: Call<Room>?, response: Response<Room>?) {
-                        if (response!!.body() == null) {
-                            Log.e(Constants.TAG_NULL_RESPONSE, "Null response: $response")
-                        } else {
-                            Toast.makeText(context, "Room edited!", Toast.LENGTH_SHORT).show()
-                            nameLayout.hint = room.name
-                        }
-                    }
-                })
-
+            updateRoom(room, nameLayout)
         }
+
+        deleteButton.setOnClickListener {
+            deleteRoom(room, position)
+        }
+    }
+
+    private fun deleteRoom(room: Room, position: Int) {
+        RoomRestAPI()
+            .deleteRoom(room.idDocument)
+            .enqueue(object : Callback<Room> {
+                override fun onFailure(call: Call<Room>?, t: Throwable?) {
+                    t!!.printStackTrace()
+                    Toast.makeText(context, "It's not possible delete room", Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onResponse(call: Call<Room>?, response: Response<Room>?) {
+                    if (response!!.body() == null) {
+                        Log.e(Constants.TAG_NULL_RESPONSE, "$response")
+                        Toast.makeText(context, "It's not possible delete room", Toast.LENGTH_SHORT).show()
+                    } else {
+                        rooms.removeAt(position)
+                        notifyItemRemoved(position)
+                        notifyItemRangeChanged(position, itemCount)
+
+                        Toast.makeText(context, "Room deleted", Toast.LENGTH_SHORT)
+                    }
+                }
+            })
+    }
+
+    private fun updateRoom(room: Room, nameLayout: TextInputLayout) {
+        RoomRestAPI()
+            .updateRoom(room)
+            .enqueue(object : Callback<Room> {
+                override fun onFailure(call: Call<Room>?, t: Throwable?) {
+                    t!!.printStackTrace()
+                }
+
+                override fun onResponse(call: Call<Room>?, response: Response<Room>?) {
+                    if (response!!.body() == null) {
+                        Log.e(Constants.TAG_NULL_RESPONSE, "Null response: $response")
+                    } else {
+                        Toast.makeText(context, "Room edited!", Toast.LENGTH_SHORT).show()
+                        nameLayout.hint = room.name
+                    }
+                }
+            })
     }
 }
 
@@ -70,5 +101,6 @@ class ViewHolderManagerRooms(view: View) : RecyclerView.ViewHolder(view) {
     val roomNameLayout: TextInputLayout = view.edit_room_name
     val roomName: EditText = view.input_room_name
     val saveButton: Button = view.button_room_save
+    val deleteButton: Button = view.button_room_delete
 }
 

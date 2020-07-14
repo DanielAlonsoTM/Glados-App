@@ -27,4 +27,8 @@ class RoutineRestAPI {
     fun updateRoutine(routine: Routine): Call<Routine> {
         return routineService.updateRoutine(routine)
     }
+
+    fun deleteRoutine(routineId: String): Call<Routine> {
+        return routineService.deleteRoutine(routineId)
+    }
 }

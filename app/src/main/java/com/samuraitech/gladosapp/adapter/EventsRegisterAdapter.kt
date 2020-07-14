@@ -38,7 +38,29 @@ class EventRegistersAdapter(private val eventRegisters: ArrayList<EventRegister>
 
         textViewHeader.text = eventRegister.title
         textViewContent.text = eventRegister.description
-//        iconEventRegister.setImageDrawable(eventRegister.drawable)
+
+        val drawableIcon = when (eventRegister.deviceType) {
+            "Bulb" -> {
+                R.drawable.icon_bulb
+            }
+            "Smart Tv" -> {
+                R.drawable.ic_action_tv
+            }
+            "Bluetooth Speaker" -> {
+                R.drawable.ic_action_speaker
+            }
+            "Curtains" -> {
+                R.drawable.ic_action_home
+            }
+            null -> {
+                R.drawable.ic_action_warning
+            }
+            else -> {
+                R.drawable.ic_action_warning
+            }
+        }
+
+        iconEventRegister.setImageDrawable(ContextCompat.getDrawable(context, drawableIcon))
 
         // Set background view
         val drawableBackground: Drawable

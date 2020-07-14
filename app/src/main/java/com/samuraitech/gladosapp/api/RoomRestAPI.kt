@@ -27,4 +27,8 @@ class RoomRestAPI() {
     fun updateRoom(room: Room): Call<Room> {
         return roomService.updateRoom(room)
     }
+
+    fun deleteRoom(idRoom: String): Call<Room> {
+        return roomService.deleteRoom(idRoom)
+    }
 }

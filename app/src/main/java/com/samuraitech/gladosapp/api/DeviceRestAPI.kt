@@ -31,5 +31,9 @@ class DeviceRestAPI {
     fun updateDevice(device: Device): Call<Device> {
         return deviceService.updateDevice(device)
     }
+
+    fun deleteDevice(device: Device): Call<Device> {
+        return deviceService.deleteDevice(device.idDocument)
+    }
 }
 
