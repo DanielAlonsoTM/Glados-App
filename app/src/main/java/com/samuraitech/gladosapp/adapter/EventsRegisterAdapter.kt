@@ -62,6 +62,11 @@ class EventRegistersAdapter(private val eventRegisters: ArrayList<EventRegister>
 
         iconEventRegister.setImageDrawable(ContextCompat.getDrawable(context, drawableIcon))
 
+        iconEventRegister.setColorFilter(
+            ContextCompat.getColor(context, R.color.colorWhite),
+            android.graphics.PorterDuff.Mode.SRC_IN
+        )
+
         // Set background view
         val drawableBackground: Drawable
 
