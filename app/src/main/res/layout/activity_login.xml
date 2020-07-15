@@ -41,7 +41,7 @@
                     android:textAllCaps="false"
                     android:fontFamily="@font/sen_bold"
                     android:paddingStart="20dp"
-                    android:drawableStart="@drawable/googleg_disabled_color_18"
+                    android:drawableStart="@drawable/googleg_standard_color_18"
                     android:background="@drawable/button_shape_blue"
                     tools:ignore="RtlSymmetry"/>
         </LinearLayout>
