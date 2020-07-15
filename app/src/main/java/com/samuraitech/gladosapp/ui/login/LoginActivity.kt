@@ -31,7 +31,6 @@ class LoginActivity : AppCompatActivity() {
 
         makeTransparentActionBar(window, supportActionBar)
 
-        val buttonSignUp = findViewById<AppCompatButton>(R.id.btn_signup)
         val buttonSingUpGoogle = findViewById<AppCompatButton>(R.id.btn_signup_google)
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -41,10 +40,6 @@ class LoginActivity : AppCompatActivity() {
             .build()
 
         val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-
-        buttonSignUp.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
-        }
 
         buttonSingUpGoogle.setOnClickListener {
             signIn(mGoogleSignInClient)
@@ -102,7 +97,6 @@ class LoginActivity : AppCompatActivity() {
 
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
-            val account = completedTask.getResult(ApiException::class.java)
 
             startActivity(Intent(this, MainActivity::class.java))
         } catch (e: ApiException) {

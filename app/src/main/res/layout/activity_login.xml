@@ -32,51 +32,6 @@
                 android:layout_alignParentBottom="true"
                 android:gravity="center"
                 android:orientation="vertical">
-            <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/email"
-                    android:textColorHint="@color/colorWhite">
-                <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/login_email"
-                        android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
-                        android:textColor="@color/colorWhite"
-                        android:inputType="textEmailAddress"
-                        android:backgroundTint="@color/colorWhite"
-                        android:drawablePadding="@dimen/default_margin"
-                        android:drawableStart="@drawable/ic_action_email"/>
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/password"
-                    android:textColorHint="@color/colorWhite">
-                <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/login_password"
-                        android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
-                        android:inputType="textPassword"
-                        android:textColor="@color/colorWhite"
-                        android:backgroundTint="@color/colorWhite"
-                        android:shadowColor="@color/colorWhite"
-                        android:drawablePadding="@dimen/default_margin"
-                        android:drawableStart="@drawable/ic_action_lock"/>
-            </com.google.android.material.textfield.TextInputLayout>
-            <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_signup"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
-                    android:text="@string/sign_up"
-                    android:textColor="@android:color/white"
-                    android:textAllCaps="false"
-                    android:background="@drawable/button_shape_red"/>
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/or"
-                    android:gravity="center"/>
             <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_signup_google"
                     android:layout_width="fill_parent"
