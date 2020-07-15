@@ -39,7 +39,10 @@
                     android:text="@string/sign_in_google"
                     android:textColor="@android:color/white"
                     android:textAllCaps="false"
-                    android:background="@drawable/button_shape_blue"/>
+                    android:paddingStart="20dp"
+                    android:drawableStart="@drawable/googleg_disabled_color_18"
+                    android:background="@drawable/button_shape_blue"
+                    tools:ignore="RtlSymmetry"/>
         </LinearLayout>
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
