@@ -17,7 +17,7 @@
                 android:layout_margin="@dimen/default_margin"
                 android:paddingStart="35dp"
                 android:paddingEnd="35dp"
-                android:drawableStart="@drawable/ic_action_lock"
+                android:drawableStart="@drawable/ic_action_phone_setup"
                 android:drawablePadding="@dimen/default_margin"
                 android:text="@string/rooms_devices_manager"
                 android:textAllCaps="false"
