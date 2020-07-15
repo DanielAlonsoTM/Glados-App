@@ -39,6 +39,7 @@
                     android:text="@string/sign_in_google"
                     android:textColor="@android:color/white"
                     android:textAllCaps="false"
+                    android:fontFamily="@font/sen_bold"
                     android:paddingStart="20dp"
                     android:drawableStart="@drawable/googleg_disabled_color_18"
                     android:background="@drawable/button_shape_blue"
