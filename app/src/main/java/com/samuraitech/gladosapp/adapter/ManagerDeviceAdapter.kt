@@ -70,12 +70,12 @@ class ManagerDeviceAdapter(private val devices: ArrayList<Device>, val context: 
 
         nameLayout.hint = device.name
 
-        saveButton.setOnClickListener {
+        saveButton.setOnClickListener { it ->
             if (editTextName.text.isNotEmpty()) {
                 device.name = editTextName.text.toString()
             }
 
-            device.roomId = spinnerRoom.selectedItem.toString().filter { it.isDigit() }.toInt()
+            device.roomId = spinnerRoom.selectedItem.let { it as Room }.idRoom
             device.type = spinnerType.selectedItem.toString()
 
             //Update device
@@ -136,43 +136,44 @@ class ManagerDeviceAdapter(private val devices: ArrayList<Device>, val context: 
         RoomRestAPI()
             .getAllRooms()
             .enqueue(object : Callback<List<Room>> {
-            override fun onFailure(call: Call<List<Room>>?, t: Throwable?) {
-                t!!.printStackTrace()
-                Toast.makeText(context, "Is not possible load rooms", Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onResponse(call: Call<List<Room>>?, response: Response<List<Room>>?) {
-                if (response!!.body() == null) {
-                    Log.e(Constants.TAG_NULL_RESPONSE, "$response")
+                override fun onFailure(call: Call<List<Room>>?, t: Throwable?) {
+                    t!!.printStackTrace()
                     Toast.makeText(context, "Is not possible load rooms", Toast.LENGTH_SHORT).show()
-                } else {
-                    val listRooms: ArrayList<String> = ArrayList()
-
-                    response.body().forEach {
-                        listRooms.add("${it.idRoom}. ${it.name}")
-                    }
-
-                    //Build adapter spinnerRoom
-                    val dataAdapterRoom: ArrayAdapter<String> = ArrayAdapter(
-                        context, R.layout.item_spinner_custom,
-                        listRooms
-                    )
-                    dataAdapterRoom.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    spinnerRoom.adapter = dataAdapterRoom
-
-                    //Set position spinnerRoom
-                    var spinnerRoomPosition = 0
-
-                    response.body().forEach {
-                        if (it.idRoom == device.roomId) {
-                            spinnerRoomPosition = dataAdapterRoom.getPosition("${it.idRoom}. ${it.name}")
-                        }
-                    }
-
-                    spinnerRoom.setSelection(spinnerRoomPosition)
                 }
-            }
-        })
+
+                override fun onResponse(call: Call<List<Room>>?, response: Response<List<Room>>?) {
+                    if (response!!.body() == null) {
+                        Log.e(Constants.TAG_NULL_RESPONSE, "$response")
+                        Toast.makeText(context, "Is not possible load rooms", Toast.LENGTH_SHORT).show()
+                    } else {
+                        val listRooms: ArrayList<Room> = ArrayList()
+
+                        response.body().forEach {
+//                        listRooms.add("${it.idRoom}. ${it.name}")
+                            listRooms.add(it)
+                        }
+
+                        //Build adapter spinnerRoom
+                        val dataAdapterRoom: ArrayAdapter<Room> = ArrayAdapter(
+                            context, R.layout.item_spinner_custom,
+                            listRooms
+                        )
+                        dataAdapterRoom.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                        spinnerRoom.adapter = dataAdapterRoom
+
+                        //Set position spinnerRoom
+                        var spinnerRoomPosition = 0
+
+                        response.body().forEach {
+                            if (it.idRoom == device.roomId) {
+                                spinnerRoomPosition = dataAdapterRoom.getPosition(it)
+                            }
+                        }
+
+                        spinnerRoom.setSelection(spinnerRoomPosition)
+                    }
+                }
+            })
     }
 }
 

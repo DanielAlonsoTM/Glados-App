@@ -35,21 +35,12 @@ class RoomsAdapter(private val rooms: ArrayList<Room>, val context: Context) : R
 
         val textViewName = holderRoom.roomName
         val textViewLastActivity = holderRoom.roomLastActivity
-        val textViewTemperature = holderRoom.roomTemperature
-        val textViewKilowattsConsumed = holderRoom.roomKilowatts
-        val textViewHumidity = holderRoom.roomHumidity
         val buttonShowDevices = holderRoom.roomShowDevices
 
-        val roomTemperature = "${room.temperatureCelsius} °C"
-        val roomKilowatts = "${room.kilowattsConsumed} kWh"
-        val roomHumidity = "${room.humidityPercent} %"
         val roomLastActivity = "Last activity: ${room.lastActivity.substring(0, 10)}"
 
         textViewName.text = room.name
         textViewLastActivity.text = roomLastActivity
-        textViewTemperature.text = roomTemperature
-        textViewKilowattsConsumed.text = roomKilowatts
-        textViewHumidity.text = roomHumidity
 
         //Create recyclerViewDevices for every Room
         val recyclerDevices: RecyclerView = holderRoom.recyclerViewDevices
@@ -113,9 +104,6 @@ class RoomsAdapter(private val rooms: ArrayList<Room>, val context: Context) : R
 class ViewHolderRoom(view: View) : RecyclerView.ViewHolder(view) {
     val roomName: TextView = view.text_routine_name
     val roomLastActivity: TextView = view.text_routine_room_name
-    val roomTemperature: TextView = view.text_temperature
-    val roomKilowatts: TextView = view.text_kilowatts
-    val roomHumidity: TextView = view.text_humidity
     val roomShowDevices: ImageButton = view.btn_show_devices
     val recyclerViewDevices: RecyclerView = view.recycler_view_devices_in_room
 }

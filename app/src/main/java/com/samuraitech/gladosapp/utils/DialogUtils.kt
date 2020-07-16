@@ -40,7 +40,7 @@ class DialogUtils {
             if (roomName.text!!.isNotEmpty() && roomName.text != null) {
                 val room = Room(
                     "",
-                    10,
+                    (0..500).random(),
                     roomName.text.toString(),
                     LocalDateTime.now().toString(),
                     "",

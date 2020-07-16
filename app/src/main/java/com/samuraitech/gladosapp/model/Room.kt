@@ -10,4 +10,8 @@ data class Room(
     @SerializedName("temperatureCelsius") val temperatureCelsius: String,
     @SerializedName("kilowattsConsumed") val kilowattsConsumed: String,
     @SerializedName("humidityPercent") val humidityPercent: String
-)
+) {
+    override fun toString(): String {
+        return name
+    }
+}
