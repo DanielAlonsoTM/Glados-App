@@ -28,6 +28,10 @@ class DeviceRestAPI {
         return deviceService.requestByRoomId(roomId)
     }
 
+    fun insertDevice(device: Device): Call<Device> {
+        return deviceService.insertDevice(device)
+    }
+
     fun updateDevice(device: Device): Call<Device> {
         return deviceService.updateDevice(device)
     }

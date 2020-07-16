@@ -8,6 +8,9 @@ interface RoomService {
     @GET("/api/rooms/getall")
     fun requestAllRooms(): Call<List<Room>>
 
+    @POST("/api/rooms/insert")
+    fun insertRoom(@Body room: Room): Call<Room>
+
     @PUT("/api/rooms/update")
     fun updateRoom(@Body room: Room): Call<Room>
 

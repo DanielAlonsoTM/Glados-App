@@ -11,6 +11,9 @@ interface DeviceService {
     @GET("/api/devices/byRoomId/{roomId}")
     fun requestByRoomId(@Path("roomId") roomId: Int): Call<List<Device>>
 
+    @POST("/api/devices/insert")
+    fun insertDevice(@Body device: Device): Call<Device>
+
     @PUT("api/devices/update")
     fun updateDevice(@Body device: Device): Call<Device>
 

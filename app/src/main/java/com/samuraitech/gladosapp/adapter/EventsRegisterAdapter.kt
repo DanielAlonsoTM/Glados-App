@@ -52,9 +52,6 @@ class EventRegistersAdapter(private val eventRegisters: ArrayList<EventRegister>
             "Curtains" -> {
                 R.drawable.ic_action_home
             }
-            null -> {
-                R.drawable.ic_action_warning
-            }
             else -> {
                 R.drawable.ic_action_warning
             }

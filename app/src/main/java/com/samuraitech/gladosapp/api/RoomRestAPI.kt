@@ -24,6 +24,10 @@ class RoomRestAPI() {
         return roomService.requestAllRooms()
     }
 
+    fun insertRoom(room: Room): Call<Room> {
+        return roomService.insertRoom(room)
+    }
+
     fun updateRoom(room: Room): Call<Room> {
         return roomService.updateRoom(room)
     }

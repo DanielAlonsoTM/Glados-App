@@ -1,17 +1,13 @@
 package com.samuraitech.gladosapp.adapter
 
 import android.content.Context
-import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.material.switchmaterial.SwitchMaterial
@@ -22,6 +18,7 @@ import com.samuraitech.gladosapp.model.Device
 import com.samuraitech.gladosapp.model.EnumType.ActionType
 import com.samuraitech.gladosapp.model.Instruction
 import com.samuraitech.gladosapp.utils.Constants
+import com.samuraitech.gladosapp.utils.Utilities
 import kotlinx.android.synthetic.main.item_device.view.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -32,7 +29,7 @@ import java.util.*
 class DevicesInRoomAdapter(private val devices: ArrayList<Device>, val context: Context) :
     RecyclerView.Adapter<ViewHolderDevice>() {
 
-    val account = GoogleSignIn.getLastSignedInAccount(context)
+    private val account = GoogleSignIn.getLastSignedInAccount(context)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderDevice {
         return ViewHolderDevice(LayoutInflater.from(context).inflate(R.layout.item_device, parent, false))
@@ -77,13 +74,13 @@ class DevicesInRoomAdapter(private val devices: ArrayList<Device>, val context: 
             android.graphics.PorterDuff.Mode.SRC_IN
         )
 
-        switchDevice.setOnCheckedChangeListener { _, isChecked ->
+        switchDevice.setOnCheckedChangeListener { buttonView, isChecked ->
             val actionType = if (isChecked) ActionType.TURN_ON else ActionType.TURN_OFF
 
             //Build instruction
             Thread(Runnable {
                 if (account == null) {
-                    Toast.makeText(context, "It's not possible execute this", Toast.LENGTH_SHORT).show()
+                    Utilities.snackBarMessage(buttonView.rootView, "It's not possible execute this")
                 } else {
                     val instruction = Instruction(
                         "0",
@@ -94,8 +91,7 @@ class DevicesInRoomAdapter(private val devices: ArrayList<Device>, val context: 
                             device.idDevice,
                             device.roomId,
                             actionType,
-                            1000
-                        ),
+                            1000),
                         0
                     )
 

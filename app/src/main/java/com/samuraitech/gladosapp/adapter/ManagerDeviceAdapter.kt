@@ -14,6 +14,8 @@ import com.samuraitech.gladosapp.api.RoomRestAPI
 import com.samuraitech.gladosapp.model.Device
 import com.samuraitech.gladosapp.model.Room
 import com.samuraitech.gladosapp.utils.Constants
+import com.samuraitech.gladosapp.utils.Utilities
+import com.samuraitech.gladosapp.utils.Utilities.snackBarMessage
 import kotlinx.android.synthetic.main.item_editable_device.view.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -77,15 +79,15 @@ class ManagerDeviceAdapter(private val devices: ArrayList<Device>, val context: 
             device.type = spinnerType.selectedItem.toString()
 
             //Update device
-            updateDevice(device, nameLayout)
+            updateDevice(device, nameLayout, it)
         }
 
         deleteButton.setOnClickListener {
-            deleteDevice(device, position)
+            deleteDevice(device, position, it)
         }
     }
 
-    private fun deleteDevice(device: Device, position: Int) {
+    private fun deleteDevice(device: Device, position: Int, view: View) {
         DeviceRestAPI()
             .deleteDevice(device)
             .enqueue(object : Callback<Device> {
@@ -103,13 +105,13 @@ class ManagerDeviceAdapter(private val devices: ArrayList<Device>, val context: 
                         notifyItemRemoved(position)
                         notifyItemRangeChanged(position, itemCount)
 
-                        Toast.makeText(context, "Device deleted", Toast.LENGTH_SHORT)
+                        snackBarMessage(view, "Device deleted")
                     }
                 }
             })
     }
 
-    private fun updateDevice(device: Device, nameLayout: TextInputLayout) {
+    private fun updateDevice(device: Device, nameLayout: TextInputLayout, view: View) {
         DeviceRestAPI()
             .updateDevice(device)
             .enqueue(object : Callback<Device> {
@@ -122,7 +124,7 @@ class ManagerDeviceAdapter(private val devices: ArrayList<Device>, val context: 
                     if (response!!.body() == null) {
                         Log.e(Constants.TAG_NULL_RESPONSE, "$response")
                     } else {
-                        Toast.makeText(context, "Device updated!", Toast.LENGTH_SHORT).show()
+                        snackBarMessage(view, "Device updated!")
 
                         nameLayout.hint = device.name
                     }
@@ -131,7 +133,9 @@ class ManagerDeviceAdapter(private val devices: ArrayList<Device>, val context: 
     }
 
     private fun loadDataRoomInSpinner(spinnerRoom: Spinner, device: Device) {
-        RoomRestAPI().getAllRooms().enqueue(object : Callback<List<Room>> {
+        RoomRestAPI()
+            .getAllRooms()
+            .enqueue(object : Callback<List<Room>> {
             override fun onFailure(call: Call<List<Room>>?, t: Throwable?) {
                 t!!.printStackTrace()
                 Toast.makeText(context, "Is not possible load rooms", Toast.LENGTH_SHORT).show()
