@@ -62,4 +62,6 @@
     <string name="device_name">Device Name</string>
     <string name="init_time">Init Time</string>
     <string name="routine_name">Routine Name</string>
+    <string name="add_room">Add Room</string>
+    <string name="add_device">Add Device</string>
 </resources>
