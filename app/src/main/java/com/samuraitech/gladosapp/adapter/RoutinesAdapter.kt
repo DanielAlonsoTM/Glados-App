@@ -16,6 +16,8 @@ import com.samuraitech.gladosapp.api.RoutineRestAPI
 import com.samuraitech.gladosapp.model.Room
 import com.samuraitech.gladosapp.model.Routine
 import com.samuraitech.gladosapp.utils.Constants
+import com.samuraitech.gladosapp.utils.Utilities
+import com.samuraitech.gladosapp.utils.Utilities.snackBarMessage
 import kotlinx.android.synthetic.main.item_routine.view.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -78,40 +80,40 @@ class RoutinesAdapter(private val routines: ArrayList<Routine>, val context: Con
         }
 
         //PUT routines state
-        buttonActiveRoutine.setOnCheckedChangeListener { _, isChecked ->
-            setStateRoutine(isChecked, routine)
+        buttonActiveRoutine.setOnCheckedChangeListener { buttonView, isChecked ->
+            setStateRoutine(isChecked, routine, buttonView.rootView)
         }
 
         buttonDelete.setOnClickListener {
-            deleteRoutine(routine, position)
+            deleteRoutine(routine, position, it)
         }
     }
 
-    private fun deleteRoutine(routine: Routine, position: Int) {
+    private fun deleteRoutine(routine: Routine, position: Int, view: View) {
         RoutineRestAPI()
             .deleteRoutine(routine.idDocument)
             .enqueue(object : Callback<Routine> {
                 override fun onFailure(call: Call<Routine>?, t: Throwable?) {
                     t!!.printStackTrace()
-                    Toast.makeText(context, "It's not possible delete routine", Toast.LENGTH_SHORT).show()
+                    snackBarMessage(view, "It's not possible delete routine")
                 }
 
                 override fun onResponse(call: Call<Routine>?, response: Response<Routine>?) {
                     if (response!!.body() == null) {
                         Log.e(Constants.TAG_NULL_RESPONSE, "$response")
-                        Toast.makeText(context, "It's not possible delete routine", Toast.LENGTH_SHORT).show()
+                        snackBarMessage(view, "It's not possible delete routine")
                     } else {
                         routines.removeAt(position)
                         notifyItemRemoved(position)
                         notifyItemRangeChanged(position, itemCount)
 
-                        Toast.makeText(context, "Routine deleted", Toast.LENGTH_SHORT).show()
+                        snackBarMessage(view, "Routine deleted")
                     }
                 }
             })
     }
 
-    private fun setStateRoutine(isChecked: Boolean, routine: Routine) {
+    private fun setStateRoutine(isChecked: Boolean, routine: Routine, view: View) {
         if (isChecked) {
             routine.active = 1
         } else {
@@ -129,13 +131,13 @@ class RoutinesAdapter(private val routines: ArrayList<Routine>, val context: Con
                     if (response!!.body() == null) {
                         Log.e(Constants.TAG_NULL_RESPONSE, "$response")
                     } else {
-                        val message = if (routine.action == 0) {
+                        val message = if (routine.active == 0) {
                             "is disable"
                         } else {
                             "is enable"
                         }
 
-                        Toast.makeText(context, "Routine $message", Toast.LENGTH_SHORT).show()
+                        snackBarMessage(view, "Routine $message")
                     }
                 }
             })
