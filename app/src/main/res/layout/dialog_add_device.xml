@@ -20,6 +20,13 @@
         android:id="@+id/spinner_type_dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:layout_marginHorizontal="15dp"
+        android:popupBackground="@drawable/gradient_mid_night_city"/>
+    <Spinner
+        android:id="@+id/spinner_room_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
         android:popupBackground="@drawable/gradient_mid_night_city"/>
 </LinearLayout>

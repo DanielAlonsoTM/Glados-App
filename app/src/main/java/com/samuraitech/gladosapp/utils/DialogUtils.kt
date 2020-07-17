@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatEditText
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -43,9 +44,9 @@ class DialogUtils {
                     (0..500).random(),
                     roomName.text.toString(),
                     LocalDateTime.now().toString(),
-                    "",
-                    "",
-                    ""
+                    "0",
+                    "0",
+                    "0"
                 )
 
                 insertRoom(room, view)
@@ -66,6 +67,7 @@ class DialogUtils {
 
         val deviceName: AppCompatEditText = dialogLayout.findViewById(R.id.device_name)
         val spinnerDeviceType: Spinner = dialogLayout.findViewById(R.id.spinner_type_dialog)
+        val spinnerRoom: Spinner = dialogLayout.findViewById(R.id.spinner_room_dialog)
 
         val account = GoogleSignIn.getLastSignedInAccount(context)
 
@@ -86,6 +88,9 @@ class DialogUtils {
         dataAdapterType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerDeviceType.adapter = dataAdapterType
 
+        //Build adapter spinnerRoom
+        loadDataRoomInSpinner(spinnerRoom, view, context)
+
         builderDialog.setView(dialogLayout)
         builderDialog.setPositiveButton("Ok") { _: DialogInterface?, _: Int ->
             if (deviceName.text!!.isNotEmpty() && deviceName.text != null) {
@@ -93,14 +98,14 @@ class DialogUtils {
                     "",
                     "dev-${UUID.randomUUID()}",
                     account?.id!!,
-                    0,
+                    spinnerRoom.selectedItem.let { it as Room }.idRoom,
                     deviceName.text.toString(),
                     spinnerDeviceType.selectedItem.toString()
                 )
 
                 insertDevice(device, view)
             } else {
-                snackBarMessage(view, "Please, type device name")
+                snackBarMessage(view, "Please, type d evice name")
             }
         }
 
@@ -142,6 +147,37 @@ class DialogUtils {
                         snackBarMessage(view, "It's not possible add room")
                     } else {
                         snackBarMessage(view, "Room added")
+                    }
+                }
+            })
+    }
+
+    private fun loadDataRoomInSpinner(spinnerRoom: Spinner, view: View, context: Context) {
+        RoomRestAPI()
+            .getAllRooms()
+            .enqueue(object : Callback<List<Room>> {
+                override fun onFailure(call: Call<List<Room>>?, t: Throwable?) {
+                    t!!.printStackTrace()
+                }
+
+                override fun onResponse(call: Call<List<Room>>?, response: Response<List<Room>>?) {
+                    if (response!!.body() == null) {
+                        Log.e(Constants.TAG_NULL_RESPONSE, "$response")
+                        snackBarMessage(view, "It's not possible load rooms")
+                    } else {
+                        val listRooms: ArrayList<Room> = ArrayList()
+
+                        response.body().forEach {
+                            listRooms.add(it)
+                        }
+
+                        //Build adapter spinnerRoom
+                        val dataAdapterRoom: ArrayAdapter<Room> = ArrayAdapter(
+                            context, R.layout.item_spinner_custom,
+                            listRooms
+                        )
+                        dataAdapterRoom.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                        spinnerRoom.adapter = dataAdapterRoom
                     }
                 }
             })

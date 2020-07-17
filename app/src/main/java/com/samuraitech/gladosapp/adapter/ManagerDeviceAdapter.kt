@@ -149,7 +149,6 @@ class ManagerDeviceAdapter(private val devices: ArrayList<Device>, val context: 
                         val listRooms: ArrayList<Room> = ArrayList()
 
                         response.body().forEach {
-//                        listRooms.add("${it.idRoom}. ${it.name}")
                             listRooms.add(it)
                         }
 
